@@ -1,0 +1,7 @@
+{
+  "name": "Project-UTS-HMP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
