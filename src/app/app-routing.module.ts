@@ -22,7 +22,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'logout',
     loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
+    path: 'detail-produk/:id',
+    loadChildren: () => import('./detail-produk/detail-produk.module').then( m => m.DetailProdukPageModule)
   }
 
 ];

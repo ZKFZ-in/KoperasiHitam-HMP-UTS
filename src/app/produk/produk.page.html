@@ -11,4 +11,13 @@
       <ion-title size="large">Produk</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list lines="full">
+    <ion-item *ngFor="let item of daftarProduk" [routerLink]="['/detail-produk', item.id]" button>
+      <ion-label>
+        <h2><b>{{ item.nama }}</b></h2>
+        <p>Harga: Rp {{ item.hargaJual | number }} | Stok: {{ item.stok }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Detail Produk</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngIf="produkDetail">
+    <img *ngIf="produkDetail.gambar" [src]="produkDetail.gambar" [alt]="produkDetail.nama" style="width: 100%; max-height: 200px; object-fit: cover;" />    
+    
+    <ion-card-header>
+      <ion-card-title>{{ produkDetail.nama }}</ion-card-title>
+      <ion-card-subtitle>{{ produkDetail.kategori }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="full">
+        <!-- Stok Produk -->
+        <ion-item>
+          <ion-label>Stok Sisa</ion-label>
+          <ion-badge [color]="produkDetail.stok > 0 ? 'success' : 'danger'" slot="end">
+            {{ produkDetail.stok }} unit
+          </ion-badge>
+        </ion-item>
+
+        <!-- Harga Beli -->
+        <ion-item>
+          <ion-label>Harga Beli</ion-label>
+          <ion-text slot="end" color="medium">
+            Rp {{ produkDetail.hargaBeli | number }}
+          </ion-text>
+        </ion-item>
+
+        <!-- Harga Jual -->
+        <ion-item>
+          <ion-label>Harga Jual</ion-label>
+          <ion-text slot="end" color="primary">
+            <b>Rp {{ produkDetail.hargaJual | number }}</b>
+          </ion-text>
+        </ion-item>
+
+        <p> {{ produkDetail.deskripsi }} </p>
+
+        <div *ngIf="!produkDetail" class="ion-text-center ion-padding">
+          <ion-text color="danger">
+            <h3>Produk tidak ditemukan</h3>
+          </ion-text>
+        </div>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
