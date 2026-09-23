@@ -48,15 +48,31 @@
           </ion-text>
         </ion-item>
 
-        <p> {{ produkDetail.deskripsi }} </p>
-
-        <div *ngIf="!produkDetail" class="ion-text-center ion-padding">
-          <ion-text color="danger">
-            <h3>Produk tidak ditemukan</h3>
+        <!-- Estimasi Keuntungan -->
+        <ion-item>
+          <ion-label>Est. Keuntungan / Unit</ion-label>
+          <ion-text slot="end" color="success">
+            <b>Rp {{ (produkDetail.hargaJual - produkDetail.hargaBeli) | number }}</b>
           </ion-text>
-        </div>
-        
+        </ion-item>
       </ion-list>
+
+        <p class="ion-padding-top" *ngIf="produkDetail.deskripsi">
+          {{ produkDetail.deskripsi }}
+        </p>
+
+      <!-- TOMBOL TAMBAH KE KERANJANG DITARUH DI SINI -->
+      <ion-button expand="block" color="primary" class="ion-margin-top" [disabled]="produkDetail.stok === 0" (click)="tambahKeranjang()">
+        <ion-icon name="cart-outline" slot="start"></ion-icon>
+        {{ produkDetail.stok > 0 ? 'Tambah ke Keranjang' : 'Stok Habis' }}
+      </ion-button>
     </ion-card-content>
   </ion-card>
+
+  <!-- (Pesan Fallback) Kalau data produk ga ada -->
+  <div *ngIf="!produkDetail" class="ion-text-center ion-padding">
+    <ion-text color="danger">
+      <h3>Produk tidak ditemukan</h3>
+    </ion-text>
+  </div>
 </ion-content>

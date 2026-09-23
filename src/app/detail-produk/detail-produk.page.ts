@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail-produk',
@@ -14,7 +15,8 @@ export class DetailProdukPage implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
-    private produkService: ProdukService
+    private produkService: ProdukService,
+    private toastController: ToastController  
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,19 @@ export class DetailProdukPage implements OnInit {
       const id = Number(params.get('id'));
       this.produkDetail = this.produkService.getProdukById(id);
     });
+  }
+
+  async tambahKeranjang() {
+    if (this.produkDetail && this.produkDetail.stok > 0) {
+    } else {
+      const toast = await this.toastController.create({
+        message: '$(this.produkDetail.nama) berhasil ditambahkan ke keranjang!',
+        duration: 2000,
+        color: 'success',
+        position: 'bottom'
+      });
+      await toast.present();
+    }
   }
 
 }
