@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>Produk</ion-title>
-    <!-- Tombol Tambah Produk (Diberi fill="solid" & color="primary") -->
+    
     <ion-buttons slot="end">
       <ion-button fill="solid" color="primary" (click)="openModalTambah()">
         <ion-icon name="add" slot="icon-only"></ion-icon>
@@ -19,22 +19,22 @@
   </ion-header>
 
   <ion-list lines="full">
-    <!-- List Produk -->
+    
     <ion-item *ngFor="let item of daftarProduk">
-      <!-- Label untuk Klik Masuk ke Detail Produk -->
+      
       <ion-label [routerLink]="['/detail-produk', item.id]" button>
         <h2><b>{{ item.nama }}</b></h2>
         <p>Harga: Rp {{ item.hargaJual | number }} | Stok: {{ item.stok }}</p>
       </ion-label>
 
-      <!-- Tombol Khusus Edit Produk (Diberi fill="solid" & color="warning") -->
+     
       <ion-button slot="end" fill="solid" color="warning" (click)="openModalEdit(item)">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Modal Form Tambah / Edit Produk -->
+  
   <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
     <ng-template>
       <ion-header>
@@ -48,48 +48,48 @@
 
       <ion-content class="ion-padding">
         
-        <!-- Pesan Error Validasi -->
+       
         <ion-text color="danger" *ngIf="errorMessage !== ''">
           <p><b>Error:</b> {{ errorMessage }}</p>
         </ion-text>
 
-        <!-- Nama Produk -->
+        
         <ion-item>
           <ion-label position="floating">Nama Produk *</ion-label>
           <ion-input [(ngModel)]="produkInput.nama" type="text"></ion-input>
         </ion-item>
 
-        <!-- Harga Beli -->
+        
         <ion-item>
           <ion-label position="floating">Harga Beli (Rp) *</ion-label>
           <ion-input [(ngModel)]="produkInput.hargaBeli" type="number"></ion-input>
         </ion-item>
 
-        <!-- Harga Jual -->
+       
         <ion-item>
           <ion-label position="floating">Harga Jual (Rp) *</ion-label>
           <ion-input [(ngModel)]="produkInput.hargaJual" type="number"></ion-input>
         </ion-item>
 
-        <!-- Stok -->
+       
         <ion-item>
           <ion-label position="floating">Stok *</ion-label>
           <ion-input [(ngModel)]="produkInput.stok" type="number"></ion-input>
         </ion-item>
 
-        <!-- Gambar -->
+        
         <ion-item>
           <ion-label position="floating">URL Gambar (Opsional)</ion-label>
           <ion-input [(ngModel)]="produkInput.gambar" type="text"></ion-input>
         </ion-item>
 
-        <!-- Kategori -->
+        
         <ion-item>
           <ion-label position="floating">Kategori (Opsional)</ion-label>
           <ion-input [(ngModel)]="produkInput.kategori" type="text"></ion-input>
         </ion-item>
 
-        <!-- Deskripsi -->
+        
         <ion-item>
           <ion-label position="floating">Deskripsi (Opsional)</ion-label>
           <ion-textarea [(ngModel)]="produkInput.deskripsi"></ion-textarea>
