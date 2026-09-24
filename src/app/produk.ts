@@ -1,9 +1,5 @@
-import { Service } from '@angular/core';
 import { Injectable } from '@angular/core';
 
-@Service()
-export class Produk {
-}
 
 export interface Produk {
   id: number;
@@ -131,5 +127,45 @@ export class ProdukService {
 
     getProdukById(id: number): Produk | undefined {
         return this.product.find(produk => produk.id === id);
+    }
+
+    addProduk(data: Produk) {
+        let maxId = 0;
+
+        for (let p of this.product) {
+            if (p.id > maxId) {
+                maxId = p.id;
+            }
+        }
+
+        const newId = maxId + 1;
+  
+        const newProduct: Produk = {
+            id: newId,
+            nama: data.nama,
+            stok: data.stok,
+            hargaBeli: data.hargaBeli,
+            hargaJual: data.hargaJual,
+            gambar: data.gambar,
+            kategori: data.kategori,
+            deskripsi: data.deskripsi
+        };
+
+        this.product.push(newProduct);
+    }
+
+    updateProduk(id: number, data: Produk) {
+        for (let i = 0; i < this.product.length; i++) {
+            if (this.product[i].id === id) {
+                this.product[i].nama = data.nama;
+                this.product[i].stok = data.stok;
+                this.product[i].hargaBeli = data.hargaBeli;
+                this.product[i].hargaJual = data.hargaJual;
+                this.product[i].gambar = data.gambar;
+                this.product[i].kategori = data.kategori;
+                this.product[i].deskripsi = data.deskripsi;
+                break; 
+            }
+        }
     }
 }
