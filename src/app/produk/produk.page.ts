@@ -85,6 +85,7 @@ export class ProdukPage implements OnInit {
       hargaBeli: produk.hargaBeli,
       hargaJual: produk.hargaJual,
       stok: produk.stok,
+      terjual: produk.terjual,
       gambar: gambarVal,
       kategori: kategoriVal,
       deskripsi: deskripsiVal

@@ -7,6 +7,7 @@ export interface Produk {
   stok: number;
   hargaBeli : number;
   hargaJual : number;
+  terjual?: number;
   gambar?: string;
   kategori?: string;
   deskripsi?: string;
@@ -22,7 +23,8 @@ export class ProdukService {
             nama: 'Beras 5kg', 
             stok: 15, 
             hargaBeli: 60000, 
-            hargaJual: 68000, 
+            hargaJual: 68000,
+            terjual: 5, 
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Sembako', 
             deskripsi: 'Beras putih pulen kualitas super.' 
@@ -33,6 +35,7 @@ export class ProdukService {
             stok: 8, 
             hargaBeli: 28000, 
             hargaJual: 32000, 
+            terjual: 10,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Sembako', 
             deskripsi: 'Minyak goreng kelapa sawit murni.' 
@@ -43,6 +46,7 @@ export class ProdukService {
             stok: 0, 
             hargaBeli: 14000, 
             hargaJual: 16000, 
+            terjual: 12,
             gambar: '', 
             kategori: 'Sembako', 
             deskripsi: 'Gula pasir tebu murni.' 
@@ -53,6 +57,7 @@ export class ProdukService {
             stok: 20, 
             hargaBeli: 26000, 
             hargaJual: 29000, 
+            terjual: 5,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Sembako', 
             deskripsi: 'Telur ayam negeri segar.' 
@@ -63,6 +68,7 @@ export class ProdukService {
             stok: 12, 
             hargaBeli: 21000, 
             hargaJual: 24500, 
+            terjual: 2,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Bumbu', 
             deskripsi: 'Kecap manis kedelai hitam pilihan.' 
@@ -73,6 +79,7 @@ export class ProdukService {
             stok: 50, 
             hargaBeli: 2800, 
             hargaJual: 3100, 
+            terjual: 9,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Makanan', 
             deskripsi: 'Mie instant rasa goreng terfavorit.' 
@@ -83,6 +90,7 @@ export class ProdukService {
             stok: 5, 
             hargaBeli: 15000, 
             hargaJual: 18000, 
+            terjual: 20,
             gambar: '', 
             kategori: 'Minuman', 
             deskripsi: 'Susu segar rasa full cream.' 
@@ -93,6 +101,7 @@ export class ProdukService {
             stok: 10, 
             hargaBeli: 19000, 
             hargaJual: 22500, 
+            terjual: 15,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Kebersihan', 
             deskripsi: 'Deterjen bubuk anti noda.' 
@@ -103,6 +112,7 @@ export class ProdukService {
             stok: 18, 
             hargaBeli: 11000, 
             hargaJual: 13000, 
+            terjual: 7,
             gambar: 'https://via.placeholder.com/150', 
             kategori: 'Minuman', 
             deskripsi: 'Kopi bubuk murni aroma mantap.' 
@@ -113,6 +123,7 @@ export class ProdukService {
             stok: 0, 
             hargaBeli: 6000, 
             hargaJual: 7500, 
+            terjual: 4,
             gambar: '', 
             kategori: 'Minuman', 
             deskripsi: 'Teh celup dengan aroma melati.' 
@@ -167,5 +178,31 @@ export class ProdukService {
                 break; 
             }
         }
+    }
+
+    
+    getJumlahProduk(): number {
+        return this.product.length;
+    }
+
+  
+    getProdukTerlaris(): string {
+        if (this.product.length === 0) {
+            return 'Belum ada produk';
+        }
+
+        let produkTerlaris = this.product[0];
+
+        for (let i = 1; i < this.product.length; i++) {
+      
+            const terjualSekarang = this.product[i].terjual || 0;
+            const terjualTertinggi = produkTerlaris.terjual || 0;
+
+            if (terjualSekarang > terjualTertinggi) {
+                produkTerlaris = this.product[i];
+            }
+        }
+
+        return produkTerlaris.nama;
     }
 }

@@ -1,21 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-menu-button slot="start"></ion-menu-button>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
+      <ion-title size="large">Dashboard</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <h2>Ringkasan Hari Ini</h2>
+
+  
+  <ion-card color="success">
+    <ion-card-header>
+      <ion-card-subtitle>Total Penjualan Hari Ini</ion-card-subtitle>
+      <ion-card-title>Rp {{ totalTransaksiHariIni | number }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-subtitle>Jumlah Jenis Produk</ion-card-subtitle>
+      <ion-card-title>{{ jumlahProduk }} Produk</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  
+  <ion-card color="warning">
+    <ion-card-header>
+      <ion-card-subtitle>Produk Terlaris</ion-card-subtitle>
+      <ion-card-title>{{ produkTerlaris }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
