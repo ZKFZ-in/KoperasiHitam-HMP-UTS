@@ -1,0 +1,94 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Keranjang</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Keranjang</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- Tombol Kembali ke Halaman Produk -->
+      <ion-back-button defaultHref="/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Keranjang Belanja</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Keranjang Belanja</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Jika ada item di keranjang -->
+  <div *ngIf="cartItems.length > 0">
+    <ion-list lines="full">
+      <ion-item *ngFor="let item of cartItems">
+        <ion-label>
+          <h2><b>{{ item.produk.nama }}</b></h2>
+          <p>Rp {{ item.produk.hargaJual | number }} / unit</p>
+          <p>Subtotal: <b>Rp {{ (item.produk.hargaJual * item.jumlah) | number }}</b></p>
+        </ion-label>
+
+        <!-- Pengatur Jumlah -->
+        <ion-buttons slot="end">
+          <ion-button color="medium" (click)="kurangJumlah(item)">
+            <ion-icon name="remove-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+
+          <ion-text class="ion-padding-horizontal">
+            <b>{{ item.jumlah }}</b>
+          </ion-text>
+
+          <ion-button color="primary" (click)="tambahJumlah(item)">
+            <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+
+          <ion-button color="danger" (click)="hapusItem(item.produk.id)">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+
+    <!-- Ringkasan Total & Tombol Konfirmasi Transaksi -->
+    <ion-card class="ion-margin-top">
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label><h2><b>Total Belanja</b></h2></ion-label>
+          <ion-text slot="end" color="primary">
+            <h3><b>Rp {{ totalBelanja | number }}</b></h3>
+          </ion-text>
+        </ion-item>
+
+        <ion-button expand="block" color="success" class="ion-margin-top" (click)="konfirmasiTransaksi()">
+          <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
+          Konfirmasi Transaksi
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Tampilan jika keranjang kosong -->
+  <div *ngIf="cartItems.length === 0" class="ion-text-center ion-padding" style="margin-top: 50px;">
+    <ion-icon name="cart-outline" style="font-size: 80px; color: var(--ion-color-medium);"></ion-icon>
+
+    <ion-text color="medium">
+      <h2>Keranjang Masih Kosong</h2>
+      <p>Silakan pilih produk terlebih dahulu dari halaman Daftar Produk.</p>
+    </ion-text>
+
+    <ion-button routerLink="/produk" color="primary" class="ion-margin-top">
+      Lihat Daftar Produk
+    </ion-button>
+  </div>
+</ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
 import { ToastController } from '@ionic/angular';
+import { CartService } from '../cart';
 
 @Component({
   selector: 'app-detail-produk',
@@ -16,6 +17,7 @@ export class DetailProdukPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private produkService: ProdukService,
+    private cartService: CartService,
     private toastController: ToastController  
   ) { }
 
@@ -28,6 +30,7 @@ export class DetailProdukPage implements OnInit {
 
   async tambahKeranjang() {
     if (this.produkDetail && this.produkDetail.stok > 0) {
+      this.cartService.addToCart(this.produkDetail);
     } else {
       const toast = await this.toastController.create({
         message: '$(this.produkDetail.nama) berhasil ditambahkan ke keranjang!',

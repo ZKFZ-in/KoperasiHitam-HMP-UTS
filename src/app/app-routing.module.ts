@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'detail-produk/:id',
     loadChildren: () => import('./detail-produk/detail-produk.module').then( m => m.DetailProdukPageModule)
+  },  {
+    path: 'keranjang',
+    loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)
   }
+
 
 ];
 
