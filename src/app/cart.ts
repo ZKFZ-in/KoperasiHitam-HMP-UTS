@@ -14,7 +14,6 @@ export class CartService {
 
   constructor() { }
 
-  // Ambil semua item keranjang
   getCart(): CartItem[] {
     return this.items;
   }

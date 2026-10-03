@@ -13,12 +13,12 @@ import { CartService } from '../cart';
 export class DetailProdukPage implements OnInit {
   produkDetail: Produk | undefined;
   defaultGambar: string = 'assets/icon/favicon.png';
-  
+
   constructor(
     private route: ActivatedRoute,
     private produkService: ProdukService,
     private cartService: CartService,
-    private toastController: ToastController  
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -31,9 +31,8 @@ export class DetailProdukPage implements OnInit {
   async tambahKeranjang() {
     if (this.produkDetail && this.produkDetail.stok > 0) {
       this.cartService.addToCart(this.produkDetail);
-    } else {
       const toast = await this.toastController.create({
-        message: '$(this.produkDetail.nama) berhasil ditambahkan ke keranjang!',
+        message: `${this.produkDetail.nama} berhasil ditambahkan ke keranjang!`,
         duration: 2000,
         color: 'success',
         position: 'bottom'
