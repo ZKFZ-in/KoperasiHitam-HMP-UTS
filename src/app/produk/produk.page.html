@@ -4,7 +4,7 @@
     <ion-title>Produk</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button fill="solid" color="primary" (click)="openModalTambah()">
+      <ion-button fill="solid" color="primary" (click)="openFormTambah()">
         <ion-icon name="add" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -18,8 +18,8 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Daftar Produk -->
   <ion-list lines="full">
-
     <ion-item *ngFor="let item of daftarProduk">
 
       <ion-label [routerLink]="['/detail-produk', item.id]" button>
@@ -31,24 +31,26 @@
       </ion-label>
 
 
-      <ion-button slot="end" fill="solid" color="warning" (click)="openModalEdit(item)">
+      <ion-button slot="end" fill="solid" color="warning" (click)="openFormEdit(item)">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
 
+  <!--Tombol Keranjang-->
   <ion-button routerLink="/keranjang">
     <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
     Keranjang
   </ion-button>
 
-  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+  <!--Tambah Produk / Edit Produk -->
+  <ion-modal [isOpen]="isFormOpen" (didDismiss)="closeForm()">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>{{ judulModal }}</ion-title>
+          <ion-title>{{ judulForm }}</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">Batal</ion-button>
+            <ion-button (click)="closeForm()">Batal</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>

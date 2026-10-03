@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdukService } from '../produk';
-import { TransaksiService } from '../transaksi';
+import { TransactionService} from '../transaction';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
 
   constructor(
     private produkService: ProdukService,
-    private transaksiService: TransaksiService
+    private transaksiService: TransactionService
   ) {}
 
   ngOnInit() {

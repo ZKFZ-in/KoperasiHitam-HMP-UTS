@@ -13,6 +13,7 @@ export interface Transaksi {
 })
 export class TransactionService {
   private riwayatTransaksi: Transaksi[] = [];
+  
 
   constructor() { }
 
@@ -31,5 +32,19 @@ export class TransactionService {
   // Ambil seluruh riwayat transaksi
   getTransactions(): Transaksi[] {
     return this.riwayatTransaksi;
+  }
+
+  getTotalTransaksiHariIni(): number {
+    let totalHariIni = 0;
+
+    const hariIni = new Date();
+    const tahun = hariIni.getFullYear();
+    const bulan = String(hariIni.getMonth() + 1).padStart(2, '0');
+    const tanggal = String(hariIni.getDate()).padStart(2, '0');
+
+    const tanggalHariIni = `${tahun}-${bulan}-${tanggal}`;
+
+
+    return totalHariIni;
   }
 }

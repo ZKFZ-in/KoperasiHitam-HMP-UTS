@@ -15,7 +15,7 @@
   </ion-header>
 
   <ion-card *ngIf="produkDetail">
-    <img *ngIf="produkDetail.gambar" [src]="produkDetail.gambar" [alt]="produkDetail.nama" style="width: 100%; max-height: 200px; object-fit: cover;" />    
+    <img [src]="produkDetail.gambar || defaultGambar"[alt]="produkDetail.nama" style="width: 100%; max-height: 200px; object-fit: cover;" />    
     
     <ion-card-header>
       <ion-card-title>{{ produkDetail.nama }}</ion-card-title>
@@ -24,7 +24,6 @@
 
     <ion-card-content>
       <ion-list lines="full">
-        <!-- Stok Produk -->
         <ion-item>
           <ion-label>Stok Sisa</ion-label>
           <ion-badge [color]="produkDetail.stok > 0 ? 'success' : 'danger'" slot="end">
@@ -32,7 +31,6 @@
           </ion-badge>
         </ion-item>
 
-        <!-- Harga Beli -->
         <ion-item>
           <ion-label>Harga Beli</ion-label>
           <ion-text slot="end" color="medium">
@@ -40,7 +38,6 @@
           </ion-text>
         </ion-item>
 
-        <!-- Harga Jual -->
         <ion-item>
           <ion-label>Harga Jual</ion-label>
           <ion-text slot="end" color="primary">
@@ -48,7 +45,6 @@
           </ion-text>
         </ion-item>
 
-        <!-- Estimasi Keuntungan -->
         <ion-item>
           <ion-label>Est. Keuntungan / Unit</ion-label>
           <ion-text slot="end" color="success">
@@ -61,7 +57,7 @@
           {{ produkDetail.deskripsi }}
         </p>
 
-      <!-- TOMBOL TAMBAH KE KERANJANG DITARUH DI SINI -->
+      <!-- Tombol Tambah ke Keranjang -->
       <ion-button expand="block" color="primary" class="ion-margin-top" [disabled]="produkDetail.stok === 0" (click)="tambahKeranjang()">
         <ion-icon name="cart-outline" slot="start"></ion-icon>
         {{ produkDetail.stok > 0 ? 'Tambah ke Keranjang' : 'Stok Habis' }}
@@ -69,7 +65,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- (Pesan Fallback) Kalau data produk ga ada -->
+  <!-- (Pesan Fallback) jika data produk tidak ada -->
   <div *ngIf="!produkDetail" class="ion-text-center ion-padding">
     <ion-text color="danger">
       <h3>Produk tidak ditemukan</h3>

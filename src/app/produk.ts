@@ -25,7 +25,7 @@ export class ProdukService {
             hargaBeli: 60000,
             hargaJual: 68000,
             terjual: 5,
-            gambar: 'https://via.placeholder.com/150',
+            gambar: 'https://images.alodokter.com/dk0z4ums3/image/upload/v1784169182/attached_image/pilihan-beras-terbaik-untuk-keluarga.jpg',
             kategori: 'Sembako',
             deskripsi: 'Beras putih pulen kualitas super.'
         },
@@ -36,7 +36,7 @@ export class ProdukService {
             hargaBeli: 28000,
             hargaJual: 32000,
             terjual: 10,
-            gambar: 'https://via.placeholder.com/150',
+            gambar: 'https://image.astronauts.cloud/product-images/2026/7/SaniaMinyakGorengPou_c0ea2113-d75b-4279-aa62-d2fa24b8f4db_900x900.png',
             kategori: 'Sembako',
             deskripsi: 'Minyak goreng kelapa sawit murni.'
         },
@@ -47,7 +47,7 @@ export class ProdukService {
             hargaBeli: 14000,
             hargaJual: 16000,
             terjual: 12,
-            gambar: '',
+            gambar: 'https://img.lazcdn.com/g/ff/kf/S805198afe58c44a69b45589484e0ef6fb.jpg_720x720q80.jpg',
             kategori: 'Sembako',
             deskripsi: 'Gula pasir tebu murni.'
         },
@@ -58,7 +58,7 @@ export class ProdukService {
             hargaBeli: 26000,
             hargaJual: 29000,
             terjual: 5,
-            gambar: 'https://via.placeholder.com/150',
+            gambar: 'https://down-id.img.susercontent.com/file/id-11134207-7r98p-lw6qcqaeeah634',
             kategori: 'Sembako',
             deskripsi: 'Telur ayam negeri segar.'
         },

@@ -9,9 +9,9 @@ import { Produk, ProdukService } from '../produk';
 })
 export class ProdukPage implements OnInit {
   daftarProduk: Produk[] = [];
-  isModalOpen: boolean = false;
+  isFormOpen:boolean = false;
   selectedProdukId: number | null = null;
-  judulModal: string = 'Tambah Produk';
+  judulForm: string = 'Tambah Produk';
 
   
   produkInput: Produk = {
@@ -38,9 +38,9 @@ export class ProdukPage implements OnInit {
     this.daftarProduk = this.produkService.getProduk();
   }
 
-  openModalTambah() {
+  openFormTambah() {
     this.selectedProdukId = null;
-    this.judulModal = 'Tambah Produk';
+    this.judulForm = 'Tambah Produk';
     this.errorMessage = '';
 
     
@@ -55,12 +55,12 @@ export class ProdukPage implements OnInit {
       deskripsi: ''
     };
 
-    this.isModalOpen = true;
+    this.isFormOpen = true;
   }
 
-  openModalEdit(produk: Produk) {
+  openFormEdit(produk: Produk) {
     this.selectedProdukId = produk.id;
-    this.judulModal = 'Edit Produk';
+    this.judulForm = 'Edit Produk';
     this.errorMessage = '';
 
     let gambarVal = '';
@@ -91,11 +91,11 @@ export class ProdukPage implements OnInit {
       deskripsi: deskripsiVal
     };
 
-    this.isModalOpen = true;
+    this.isFormOpen = true;
   }
 
-  closeModal() {
-    this.isModalOpen = false;
+  closeForm() {
+    this.isFormOpen = false;
   }
 
   simpanProduk() {
@@ -130,6 +130,6 @@ export class ProdukPage implements OnInit {
     }
 
     this.loadProduk();
-    this.closeModal();
+    this.closeForm();
   }
 }
