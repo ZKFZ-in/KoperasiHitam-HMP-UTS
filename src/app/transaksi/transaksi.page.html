@@ -16,8 +16,20 @@
 
   <!-- Tampilan jika sudah ada riwayat transaksi -->
   <div *ngIf="daftarTransaksi.length > 0">
+    <!-- Komponen Sorting / Pengurutan -->
+    <ion-item class="ion-margin-bottom" lines="outline">
+      <ion-label><b>Urutkan:</b></ion-label>
+      <ion-select [(ngModel)]="sortOptions" interface="popover">
+        <ion-select-option value="terbaru">Tanggal Terbaru</ion-select-option>
+        <ion-select-option value="terlama">Tanggal Terlama</ion-select-option>
+        <ion-select-option value="termahal">Total Termahal</ion-select-option>
+        <ion-select-option value="termurah">Total Termurah</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Daftar Transaksi yang Terurut -->
     <ion-list lines="full">
-      <ion-item *ngFor="let item of daftarTransaksi" (click)="bukaDetail(item)" button>
+      <ion-item *ngFor="let item of listTransaksiSorted" (click)="bukaDetail(item)" button>
         <ion-icon name="receipt-outline" slot="start" color="primary" style="font-size: 28px;"></ion-icon>
         <ion-label>
           <h2><b>TRX-{{ item.id }}</b></h2>
