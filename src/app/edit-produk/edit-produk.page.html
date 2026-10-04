@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-input label="Nama Produk *" labelPlacement="floating" type="text"
+      [(ngModel)]="produkInput.nama" (ionInput)="validasiNama()"></ion-input>
+  </ion-item>
+  <ion-note color="danger" *ngIf="errorNama !== ''">{{ errorNama }}</ion-note>
+
+  <ion-item>
+    <ion-input label="Harga Beli (Rp) *" labelPlacement="floating" type="number"
+      [(ngModel)]="produkInput.hargaBeli" (ionInput)="validasiHargaBeli()"></ion-input>
+  </ion-item>
+  <ion-note color="danger" *ngIf="errorHargaBeli !== ''">{{ errorHargaBeli }}</ion-note>
+
+  <ion-item>
+    <ion-input label="Harga Jual (Rp) *" labelPlacement="floating" type="number"
+      [(ngModel)]="produkInput.hargaJual" (ionInput)="validasiHargaJual()"></ion-input>
+  </ion-item>
+  <ion-note color="danger" *ngIf="errorHargaJual !== ''">{{ errorHargaJual }}</ion-note>
+
+  <ion-item>
+    <ion-input label="Stok *" labelPlacement="floating" type="number"
+      [(ngModel)]="produkInput.stok" (ionInput)="validasiStok()"></ion-input>
+  </ion-item>
+  <ion-note color="danger" *ngIf="errorStok !== ''">{{ errorStok }}</ion-note>
+
+  <ion-item>
+    <ion-input label="URL Gambar (Opsional)" labelPlacement="floating" type="text"
+      [(ngModel)]="produkInput.gambar"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input label="Kategori (Opsional)" labelPlacement="floating" type="text"
+      [(ngModel)]="produkInput.kategori"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea label="Deskripsi (Opsional)" labelPlacement="floating"
+      [(ngModel)]="produkInput.deskripsi"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" (click)="simpanProduk()" class="ion-margin-top">
+    Simpan Produk
+  </ion-button>
+</ion-content>
