@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService, CartItem } from '../cart';
 import { TransactionService } from '../transaction';
 import { ProdukService } from '../produk';
-import { ToastController, AlertController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-keranjang',
@@ -13,68 +13,84 @@ import { ToastController, AlertController, NavController } from '@ionic/angular'
 export class KeranjangPage implements OnInit {
   cartItems: CartItem[] = [];
 
+  //kontrol ion-alert
+  isWarningAlertOpen = false;
+  warningMessage= '';
+  isConfirmAlertOpen = false;
+  isSuccessAlertOpen = false;
+
   constructor(
     private cartService: CartService,
     private transactionService: TransactionService,
     private produkService: ProdukService,
-    private toastController: ToastController,
-    private alertController: AlertController,
-    private navCtrl: NavController
+    private router: Router
   ) {}
 
   ngOnInit() {}
 
   // Memastikan isi keranjang selalu terbaru setiap kali halaman dibuka
   ionViewWillEnter() {
-    this.cartItems = this.cartService.getCart();
+    this.refreshCart();
+  }
+
+  refreshCart() { 
+    this.cartItems = this.cartService.getCart(); 
   }
 
   get totalBelanja(): number {
     return this.cartService.getTotalPrice();
   }
 
+  get pesanAlert(): string {
+    return `Total Pembayaran: Rp ${this.totalBelanja.toLocaleString('id-ID')}. Lanjutkan simpan transaksi?`;
+  }
+
+  bukaKonfirmasi() { 
+    if (this.cartItems.length > 0) { 
+      this.isConfirmAlertOpen = true; 
+    } 
+  }
+
+  get confirmButtons() { 
+    return [ 
+      { 
+        text: 'Batal', 
+        role: 'cancel', 
+        handler: () => { 
+          this.isConfirmAlertOpen = false; 
+        } 
+      }, { 
+        text: 'Konfirmasi', 
+        handler: () => { 
+          this.prosesCheckout(); 
+        } 
+      } 
+    ]; 
+  }
+
   tambahJumlah(item: CartItem) {
     if (item.jumlah < item.produk.stok) {
       this.cartService.updateQuantity(item.produk.id, 1);
+      this.refreshCart();
     } else {
-      this.presentToast('Jumlah melebihi stok yang tersedia!');
+      this.warningMessage = 'Jumlah melebihi stok yang tersedia!';
+      this.isWarningAlertOpen = true;
     }
   }
 
   kurangJumlah(item: CartItem) {
     this.cartService.updateQuantity(item.produk.id, -1);
-    this.cartItems = this.cartService.getCart();
+    this.refreshCart();
   }
 
   hapusItem(productId: number) {
     this.cartService.removeFromCart(productId);
-    this.cartItems = this.cartService.getCart();
-  }
-
-  async konfirmasiTransaksi() {
-    if (this.cartItems.length === 0) {
-      this.presentToast('Keranjang belanja masih kosong!');
-      return;
-    }
-
-    const alert = await this.alertController.create({
-      header: 'Konfirmasi Transaksi',
-      message: `Total Pembayaran: Rp ${this.totalBelanja.toLocaleString('id-ID')}. Lanjutkan simpan transaksi?`,
-      buttons: [
-        { text: 'Batal', role: 'cancel' },
-        {
-          text: 'Konfirmasi',
-          handler: () => {
-            this.prosesCheckout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+    this.refreshCart();
   }
 
   async prosesCheckout() {
+    if (this.cartItems.length === 0) return;
+
     // 1. Kurangi stok produk
     this.cartItems.forEach(item => {
       this.produkService.reduceStock(item.produk.id, item.jumlah);
@@ -85,20 +101,15 @@ export class KeranjangPage implements OnInit {
 
     // 3. Kosongkan keranjang
     this.cartService.clearCart();
-    this.cartItems = [];
+    this.refreshCart();
 
-    // 4. Pesan sukses & kembali ke halaman produk
-    await this.presentToast('Transaksi berhasil dikonfirmasi dan disimpan ke riwayat!');
-    this.navCtrl.navigateBack('/produk');
+    // 4. Tampilkan alert sukses
+    this.isConfirmAlertOpen = false;
+    this.isSuccessAlertOpen = true;
   }
 
-  async presentToast(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000,
-      color: 'dark',
-      position: 'bottom'
-    });
-    await toast.present();
+  onSuccessAlertDismiss() {
+    this.isSuccessAlertOpen = false;
+    this.router.navigate(['/transaksi']);
   }
 }

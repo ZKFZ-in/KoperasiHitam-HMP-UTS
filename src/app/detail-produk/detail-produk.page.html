@@ -53,17 +53,42 @@
         </ion-item>
       </ion-list>
 
-        <p class="ion-padding-top" *ngIf="produkDetail.deskripsi">
-          {{ produkDetail.deskripsi }}
-        </p>
+      <p class="ion-padding-top" *ngIf="produkDetail.deskripsi">
+        {{ produkDetail.deskripsi }}
+      </p>
 
-      <!-- Tombol Tambah ke Keranjang -->
-      <ion-button expand="block" color="primary" class="ion-margin-top" [disabled]="produkDetail.stok === 0" (click)="tambahKeranjang()">
+      <!-- Tombol Tambah ke Keranjang memicu Alert Prompt -->
+      <ion-button 
+        expand="block" 
+        color="primary" 
+        class="ion-margin-top" 
+        [disabled]="produkDetail.stok === 0" 
+        (click)="bukaInputJumlah()">
         <ion-icon name="cart-outline" slot="start"></ion-icon>
         {{ produkDetail.stok > 0 ? 'Tambah ke Keranjang' : 'Stok Habis' }}
       </ion-button>
     </ion-card-content>
   </ion-card>
+
+  <!-- 1. Alert Prompt untuk memasukkan jumlah produk -->
+  <ion-alert
+    [isOpen]="isInputAlertOpen"
+    header="Jumlah Pembelian"
+    [subHeader]="'Stok tersedia: ' + (produkDetail?.stok || 0) + ' unit'"
+    message="Masukkan jumlah barang yang ingin dibeli:"
+    [inputs]="alertInputs"
+    [buttons]="alertButtons"
+    (didDismiss)="isInputAlertOpen = false">
+  </ion-alert>
+
+  <!-- 2. Alert Sukses memberitahukan produk berhasil dimasukkan ke keranjang -->
+  <ion-alert
+    [isOpen]="isSuksesAlertOpen"
+    header="Berhasil"
+    [message]="pesanSukses"
+    [buttons]="['OK']"
+    (didDismiss)="isSuksesAlertOpen = false">
+  </ion-alert>
 
   <!-- (Pesan Fallback) jika data produk tidak ada -->
   <div *ngIf="!produkDetail" class="ion-text-center ion-padding">

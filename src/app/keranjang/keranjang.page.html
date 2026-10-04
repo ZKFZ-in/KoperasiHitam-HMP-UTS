@@ -56,13 +56,12 @@
           </ion-text>
         </ion-item>
 
-        <ion-button expand="block" color="success" class="ion-margin-top" (click)="konfirmasiTransaksi()">
+        <ion-button id="btn-konfirmasi" expand="block" color="success" class="ion-margin-top">
           <ion-icon name="checkmark-done-circle-outline" slot="start"></ion-icon>
           Konfirmasi Transaksi
         </ion-button>
       </ion-card-content>
     </ion-card>
-  </div>
 
   <!-- Tampilan jika keranjang kosong -->
   <div *ngIf="cartItems.length === 0" class="ion-text-center ion-padding" style="margin-top: 50px;">
@@ -77,4 +76,32 @@
       Lihat Daftar Produk
     </ion-button>
   </div>
+
+    <!-- Alert Konfirmasi Transaksi -->
+    <ion-alert
+      trigger="btn-konfirmasi"
+      header="Konfirmasi Transaksi"
+      [message]="pesanAlert"
+      [buttons]="confirmButtons"
+      (didDismiss)="isConfirmAlertOpen = false">
+    </ion-alert>
+  </div>
+
+  <!-- Alert Peringatan Stok -->
+  <ion-alert
+    [isOpen]="isWarningAlertOpen"
+    header="Peringatan"
+    [message]="warningMessage"
+    [buttons]="['OK']"
+    (didDismiss)="isWarningAlertOpen = false">
+  </ion-alert>
+
+  <!-- Alert Sukses Transaksi -->
+  <ion-alert
+    [isOpen]="isSuccessAlertOpen"
+    header="Transaksi Berhasil"
+    message="Transaksi berhasil dikonfirmasi dan disimpan ke riwayat!"
+    [buttons]="['OK']"
+    (didDismiss)="onSuccessAlertDismiss()">
+  </ion-alert>
 </ion-content>

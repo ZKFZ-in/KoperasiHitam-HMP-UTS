@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Produk } from './produk'; // Sesuaikan path interface Produk kamu
+import { Produk } from './produk';
 
 export interface CartItem {
   produk: Produk;
@@ -19,14 +19,16 @@ export class CartService {
   }
 
   // Tambah produk ke keranjang
-  addToCart(produk: Produk) {
+  addToCart(produk: Produk, qty: number = 1) {
     const existingIndex = this.items.findIndex(item => item.produk.id === produk.id);
     if (existingIndex > -1) {
-      if (this.items[existingIndex].jumlah < produk.stok) {
-        this.items[existingIndex].jumlah++;
-      }
+      const totalQty = this.items[existingIndex].jumlah + qty;
+      this.items[existingIndex].jumlah = Math.min(totalQty, produk.stok);
     } else {
-      this.items.push({ produk, jumlah: 1 });
+      this.items.push({ 
+        produk: {...produk}, 
+        jumlah: Math.min(qty, produk.stok) 
+      });
     }
   }
 

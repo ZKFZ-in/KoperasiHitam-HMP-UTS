@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
-import { ToastController } from '@ionic/angular';
 import { CartService } from '../cart';
 
 @Component({
@@ -14,11 +13,15 @@ export class DetailProdukPage implements OnInit {
   produkDetail: Produk | undefined;
   defaultGambar: string = 'assets/icon/favicon.png';
 
+  //Kontrol ion-alert
+  isInputAlertOpen: boolean = false;
+  isSuksesAlertOpen: boolean = false;
+  pesanSukses: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private produkService: ProdukService,
-    private cartService: CartService,
-    private toastController: ToastController
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -28,17 +31,54 @@ export class DetailProdukPage implements OnInit {
     });
   }
 
-  async tambahKeranjang() {
-    if (this.produkDetail && this.produkDetail.stok > 0) {
-      this.cartService.addToCart(this.produkDetail);
-      const toast = await this.toastController.create({
-        message: `${this.produkDetail.nama} berhasil ditambahkan ke keranjang!`,
-        duration: 2000,
-        color: 'success',
-        position: 'bottom'
-      });
-      await toast.present();
-    }
+  // Buka Alert Prompt saat tombol "Tambah ke Keranjang" diklik 
+  bukaInputJumlah() { 
+    if (this.produkDetail && this.produkDetail.stok > 0) { 
+      this.isInputAlertOpen = true; 
+    } 
   }
 
+  // Input konfigurasi untuk Alert Prompt 
+  get alertInputs() { 
+    return [ 
+      { 
+        name: 'jumlah', 
+        type: 'number', 
+        placeholder: 'Masukkan jumlah unit', 
+        value: 1, 
+        min: 1, 
+        max: this.produkDetail ? this.produkDetail.stok : 1 
+      } 
+    ]; 
+  }
+
+  // Tombol untuk Alert Prompt 
+  get alertButtons() {
+    return [
+      {
+        text: 'Batal',
+        role: 'cancel',
+        handler: () => {
+          this.isInputAlertOpen = false;
+        }
+      }, {
+        text: 'Konfirmasi',
+        handler: (data: any) => {
+          const qty = Number(data.jumlah);
+          if (this.produkDetail && qty > 0 && qty <= this.produkDetail.stok) { 
+            // 1. Simpan ke keranjang sejumlah qty 
+            this.cartService.addToCart(this.produkDetail, qty); 
+            // 2. Tutup alert prompt & panggil alert sukses 
+            this.isInputAlertOpen = false; 
+            this.pesanSukses = `${qty}x ${this.produkDetail.nama} berhasil ditambahkan ke keranjang!`;
+            this.isSuksesAlertOpen = true; 
+            return true; 
+          } else { 
+            // Jika jumlah 0 atau melebihi stok 
+            return false; 
+          }
+        }
+      }
+    ];
+  }
 }
