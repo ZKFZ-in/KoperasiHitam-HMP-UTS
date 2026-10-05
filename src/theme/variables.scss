@@ -1,2 +1,49 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+ion-app.dark {
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18, 18, 18;
+
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+
+    --ion-item-background: #1e1e1e;
+    --ion-card-background: #1e1e1e;
+    --ion-toolbar-background: #1f1f1f;
+
+    #myAvatar {
+        border:#f8f0f0;
+    }
+    .isiInformasi {
+        color:#ffffff;
+    }
+}
+
+:root 
+{
+    #myAvatar {
+        margin-top: 60px;
+        size: 500px;
+        height: 500px;
+        width: 500px;
+    }
+
+    #frame {
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .isiInformasi {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align:center;
+        color:#000000;
+    }
+
+    #logo
+    {
+        border: 3px solid #d4af37;
+        border-radius: 50%;
+    }
+}

@@ -11,4 +11,11 @@
       <ion-title size="large">settings</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Dark Mode</ion-label>
+      <ion-toggle [(ngModel)]="theme.isDarkMode"></ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>

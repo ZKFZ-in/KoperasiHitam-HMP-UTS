@@ -260,14 +260,17 @@ export class TransactionService {
   getTotalTransaksiHariIni(): number {
     let totalHariIni = 0;
 
-    const hariIni = new Date();
-    const tahun = hariIni.getFullYear();
-    const bulan = String(hariIni.getMonth() + 1).padStart(2, '0');
-    const tanggal = String(hariIni.getDate()).padStart(2, '0');
+    const hariIni = new Date().toDateString();
+    console.log('hari ini:', hariIni, '| jumlah transaksi:', this.riwayatTransaksi.length, '| terbaru:', this.riwayatTransaksi[0]?.tanggal);
 
-    const tanggalHariIni = `${tahun}-${bulan}-${tanggal}`;
-
-
+    for(const t of this.riwayatTransaksi)
+    {
+      if(new Date(t.tanggal).toDateString() === hariIni)
+      {
+        totalHariIni += t.total;
+      }
+    }
+    console.log('total transaksi terbaru:', this.riwayatTransaksi[0]?.total, '| hasil hitung:', totalHariIni);
     return totalHariIni;
   }
 }

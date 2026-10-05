@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Theme } from '../theme';
 
 @Component({
   selector: 'app-settings',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  constructor(public theme: Theme) { }
 
   ngOnInit() {
   }
