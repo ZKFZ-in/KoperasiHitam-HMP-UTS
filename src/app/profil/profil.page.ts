@@ -28,6 +28,5 @@ export class ProfilPage implements OnInit {
   loadProfile()
   {
     this.profile = this.profileService.getProfile()[0];
-    console.log('Profil dimuat:', this.profile.namaToko);
   }
 }

@@ -9,7 +9,9 @@ import { TransactionService } from '../transaction';
   standalone: false
 })
 export class HomePage implements OnInit {
-
+  jumlahProduk: number = 0;
+  totalTransaksiHariIni: number = 0;
+  produkTerlaris: string = '-';
   constructor(
     private produkService: ProdukService,
     private transaksiService: TransactionService
@@ -17,22 +19,17 @@ export class HomePage implements OnInit {
   ) { console.log('HomePage DIBUAT'); }
 
   ngOnInit() {
-
+    this.loadDataDashboard();
   }
 
   ionViewWillEnter() {
-    console.log('[Dashboard] ionViewWillEnter jalan');
+    this.loadDataDashboard();
   }
 
-  getJumlahProduk(): number {
-    return this.produkService.getJumlahProduk();
+  loadDataDashboard() {
+    this.jumlahProduk = this.produkService.getJumlahProduk();
+    this.totalTransaksiHariIni = this.transaksiService.getTotalTransaksiHariIni();
+    this.produkTerlaris = this.produkService.getProdukTerlaris();
   }
 
-  getTotalHariIni(): number {
-    return this.transaksiService.getTotalTransaksiHariIni();
-  }
-
-  getProdukTerlaris(): string {
-    return this.produkService.getProdukTerlaris();
-  }
 }

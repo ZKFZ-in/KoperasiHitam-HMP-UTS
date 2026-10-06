@@ -18,7 +18,7 @@
   <ion-card color="success">
     <ion-card-header>
       <ion-card-subtitle>Total Penjualan Hari Ini</ion-card-subtitle>
-      <ion-card-title>Rp {{ getTotalHariIni() | number }}</ion-card-title>
+      <ion-card-title>Rp {{ totalTransaksiHariIni | number }}</ion-card-title>
     </ion-card-header>
   </ion-card>
 
@@ -26,7 +26,7 @@
   <ion-card color="primary">
     <ion-card-header>
       <ion-card-subtitle>Jumlah Jenis Produk</ion-card-subtitle>
-      <ion-card-title>{{ getJumlahProduk() }} Produk</ion-card-title>
+      <ion-card-title>{{ jumlahProduk }} Produk</ion-card-title>
     </ion-card-header>
   </ion-card>
 
@@ -34,7 +34,7 @@
   <ion-card color="warning">
     <ion-card-header>
       <ion-card-subtitle>Produk Terlaris</ion-card-subtitle>
-      <ion-card-title>{{ getProdukTerlaris() }}</ion-card-title>
+      <ion-card-title>{{ produkTerlaris }}</ion-card-title>
     </ion-card-header>
   </ion-card>
 </ion-content>
