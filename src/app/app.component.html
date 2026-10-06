@@ -15,17 +15,17 @@
             </ion-item>
           </ion-list>
           <ion-list>
-            <ion-item routerLink="/about" menuClose>
-              <ion-icon name="help-circle-outline" slot="start"></ion-icon>
-              <ion-label>About App</ion-label>
+            <ion-item routerLink="/produk" menuClose>
+              <ion-icon name="cube-outline" slot="start"></ion-icon>
+              <ion-label>Produk</ion-label>
             </ion-item>
-            <ion-item routerLink="/settings" menuClose>
-              <ion-icon name="settings" slot="start"></ion-icon>
-              <ion-label>Settings</ion-label>
+            <ion-item routerLink="/transaksi" menuClose>
+              <ion-icon name="receipt-outline" slot="start"></ion-icon>
+              <ion-label>Transaksi</ion-label>
             </ion-item>
-            <ion-item routerLink="/logout" menuClose>
-              <ion-icon name="log-out-outline" slot="start"></ion-icon>
-              <ion-label>Logout</ion-label>
+            <ion-item routerLink="/profil" menuClose>
+              <ion-icon name="person-outline" slot="start"></ion-icon>
+              <ion-label>Profil</ion-label>
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
@@ -42,20 +42,20 @@
         <ion-icon name="home-outline"></ion-icon>
         <ion-label>Dashboard</ion-label>
       </ion-tab-button>
-
-      <ion-tab-button tab="produk" routerLink="/produk">
-        <ion-icon name="cube-outline"></ion-icon>
-        <ion-label>Produk</ion-label>
+      
+      <ion-tab-button tab="about" routerLink="/about">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        <ion-label>About App</ion-label>
+      </ion-tab-button>
+      
+      <ion-tab-button tab="settings" routerLink="/settings">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Settings</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="transaksi" routerLink="/transaksi">
-        <ion-icon name="receipt-outline"></ion-icon>
-        <ion-label>Transaksi</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="profil" routerLink="/profil">
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Profil</ion-label>
+      <ion-tab-button tab="logout" routerLink="/logout">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
