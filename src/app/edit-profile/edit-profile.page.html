@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot = "start">
+      <ion-back-button defaultHref="/profil"></ion-back-button>
+    </ion-button>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input label="Nama Toko" labelPlacement="floating" type="text"
+      [(ngModel)]="profileInput.namaToko">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input label="Alamat" labelPlacement="floating" type="text"
+      [(ngModel)]="profileInput.alamat">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input label="No Telepon" labelPlacement="floating" type="text"
+      [(ngModel)]="profileInput.noTelepon">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input label="Jam Operasional" labelPlacement="floating" type="text"
+      [(ngModel)]="profileInput.jamOperasional">
+    </ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="updateProfile()" class="ion-margin-top">
+    Simpan Profile
+  </ion-button>
+</ion-content>

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProdukService } from '../produk';
 import { TransactionService } from '../transaction';
 
@@ -9,9 +9,6 @@ import { TransactionService } from '../transaction';
   standalone: false
 })
 export class HomePage implements OnInit {
-  jumlahProduk: number = 0;
-  totalTransaksiHariIni: number = 0
-  produkTerlaris: string = '';
 
   constructor(
     private produkService: ProdukService,
@@ -20,18 +17,22 @@ export class HomePage implements OnInit {
   ) { console.log('HomePage DIBUAT'); }
 
   ngOnInit() {
-    this.loadDataDashboard();
+
   }
 
   ionViewWillEnter() {
-    this.loadDataDashboard();
-    this.cdr.detectChanges();
+    console.log('[Dashboard] ionViewWillEnter jalan');
   }
 
-  loadDataDashboard() {
-    this.jumlahProduk = this.produkService.getJumlahProduk();
-    this.totalTransaksiHariIni = this.transaksiService.getTotalTransaksiHariIni();
-    this.produkTerlaris = this.produkService.getProdukTerlaris();
+  getJumlahProduk(): number {
+    return this.produkService.getJumlahProduk();
   }
-  
+
+  getTotalHariIni(): number {
+    return this.transaksiService.getTotalTransaksiHariIni();
+  }
+
+  getProdukTerlaris(): string {
+    return this.produkService.getProdukTerlaris();
+  }
 }

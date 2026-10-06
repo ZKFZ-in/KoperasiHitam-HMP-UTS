@@ -20,10 +20,14 @@
 
   <ion-card class="informasi">
     <ion-card-content class="isiInformasi">
-      Nama Toko: Koperasi Hitam <br>
-      Alamat: Jl. Raya No 123, Surabaya <br>
-      No Telepon: 08123456789 <br>
-      Jam Operasional: 24 Jam <br>
+      Nama Toko: {{ profile.namaToko }} <br>
+      Alamat: {{ profile.alamat }} <br>
+      No Telepon: {{ profile.noTelepon }} <br>
+      Jam Operasional: {{ profile.jamOperasional }} <br>
     </ion-card-content>
   </ion-card>
+
+  <ion-button [routerLink]="['/edit-profile', profile.id]">
+    Edit Profile
+  </ion-button>
 </ion-content>
