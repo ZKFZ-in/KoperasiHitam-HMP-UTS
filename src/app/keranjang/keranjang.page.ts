@@ -98,6 +98,7 @@ export class KeranjangPage implements OnInit {
 
     // 2. Simpan transaksi ke riwayat
     this.transactionService.addTransaction(this.cartItems, this.totalBelanja);
+    
 
     // 3. Kosongkan keranjang
     this.cartService.clearCart();

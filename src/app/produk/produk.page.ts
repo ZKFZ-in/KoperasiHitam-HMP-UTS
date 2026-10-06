@@ -10,6 +10,9 @@ import { Produk, ProdukService } from '../produk';
 export class ProdukPage implements OnInit {
   daftarProduk: Produk[] = [];
 
+  
+  kataKunci: string = '';
+
   constructor(private produkService: ProdukService) {}
 
   ngOnInit() {
@@ -22,5 +25,19 @@ export class ProdukPage implements OnInit {
 
   loadProduk() {
     this.daftarProduk = this.produkService.getProduk();
+  }
+
+  
+  get produkTerfilter(): Produk[] {
+    const kunci = (this.kataKunci || '').trim().toLowerCase();
+
+    
+    if (kunci === '') {
+      return this.daftarProduk;
+    }
+
+    return this.daftarProduk.filter(item =>
+      item.nama.toLowerCase().includes(kunci)
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProdukService } from '../produk';
 import { TransactionService } from '../transaction';
 
@@ -8,17 +8,15 @@ import { TransactionService } from '../transaction';
   styleUrls: ['./home.page.scss'],
   standalone: false
 })
-export class HomePage implements OnInit {
+export class HomePage {
   jumlahProduk: number = 0;
   totalTransaksiHariIni: number = 0;
   produkTerlaris: string = '-';
+
   constructor(
     private produkService: ProdukService,
     private transaksiService: TransactionService
-    , private cdr: ChangeDetectorRef
-  ) { console.log('HomePage DIBUAT'); }
-
-  ngOnInit() {
+  ) {
     this.loadDataDashboard();
   }
 
@@ -31,5 +29,4 @@ export class HomePage implements OnInit {
     this.totalTransaksiHariIni = this.transaksiService.getTotalTransaksiHariIni();
     this.produkTerlaris = this.produkService.getProdukTerlaris();
   }
-
 }

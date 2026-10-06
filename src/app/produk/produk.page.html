@@ -10,6 +10,17 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
+  <!-- Pencarian Produk Real-Time (tanpa tombol submit) -->
+  <ion-toolbar>
+    <ion-searchbar
+      [(ngModel)]="kataKunci"
+      [debounce]="0"
+      placeholder="Cari nama produk..."
+      [showClearButton]="'focus'"
+      inputmode="search">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -21,7 +32,7 @@
 
   <!-- Daftar Produk -->
   <ion-list lines="full">
-    <ion-item *ngFor="let item of daftarProduk">
+    <ion-item *ngFor="let item of produkTerfilter">
 
       <ion-label [routerLink]="['/detail-produk', item.id]" button>
         <h2><b>{{ item.nama }}</b></h2>
@@ -37,6 +48,12 @@
       </ion-button>
     </ion-item>
   </ion-list>
+
+  <!-- Pesan jika hasil pencarian kosong -->
+  <div class="ion-text-center ion-padding" *ngIf="kataKunci.trim() && produkTerfilter.length === 0">
+    <ion-icon name="search-outline" size="large"></ion-icon>
+    <p>Produk "<b>{{ kataKunci }}</b>" tidak ditemukan.</p>
+  </div>
 
   <!--Tombol Keranjang-->
   <ion-button routerLink="/keranjang">
