@@ -63,6 +63,16 @@
       </ion-card-content>
     </ion-card>
 
+    <!-- Alert Konfirmasi Transaksi -->
+    <ion-alert
+      trigger="btn-konfirmasi"
+      header="Konfirmasi Transaksi"
+      [message]="pesanAlert"
+      [buttons]="confirmButtons"
+      (didDismiss)="isConfirmAlertOpen = false">
+    </ion-alert>
+  </div>
+
   <!-- Tampilan jika keranjang kosong -->
   <div *ngIf="cartItems.length === 0" class="ion-text-center ion-padding" style="margin-top: 50px;">
     <ion-icon name="cart-outline" style="font-size: 80px; color: var(--ion-color-medium);"></ion-icon>
@@ -75,16 +85,6 @@
     <ion-button routerLink="/produk" color="primary" class="ion-margin-top">
       Lihat Daftar Produk
     </ion-button>
-  </div>
-
-    <!-- Alert Konfirmasi Transaksi -->
-    <ion-alert
-      trigger="btn-konfirmasi"
-      header="Konfirmasi Transaksi"
-      [message]="pesanAlert"
-      [buttons]="confirmButtons"
-      (didDismiss)="isConfirmAlertOpen = false">
-    </ion-alert>
   </div>
 
   <!-- Alert Peringatan Stok -->

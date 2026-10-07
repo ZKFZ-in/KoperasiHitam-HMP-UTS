@@ -88,23 +88,19 @@ export class KeranjangPage implements OnInit {
     this.refreshCart();
   }
 
-  async prosesCheckout() {
-    if (this.cartItems.length === 0) return;
+  // sesudah
+  prosesCheckout() {
+    const hasil = this.cartService.checkout();
 
-    // 1. Kurangi stok produk
-    this.cartItems.forEach(item => {
-      this.produkService.reduceStock(item.produk.id, item.jumlah);
-    });
+    if (!hasil.berhasil) {
+      this.warningMessage = hasil.pesan || 'Checkout gagal.';
+      this.isWarningAlertOpen = true;
+      return;
+    }
 
-    // 2. Simpan transaksi ke riwayat
-    this.transactionService.addTransaction(this.cartItems, this.totalBelanja);
-    
-
-    // 3. Kosongkan keranjang
-    this.cartService.clearCart();
     this.refreshCart();
 
-    // 4. Tampilkan alert sukses
+    
     this.isConfirmAlertOpen = false;
     this.isSuccessAlertOpen = true;
   }
