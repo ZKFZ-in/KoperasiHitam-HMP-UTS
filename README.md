@@ -5,18 +5,27 @@
 ---
 
 ## Fitur Utama
+- **Struktur Navigasi**:
+  - Menampilkan 4 tab yang akan mengarahkan ke masing masing page yaitu Dashboard, Produk, Transaksi, dan Profile
+  - Menampilkan 4 menu tambahan yang terdapat di Drawe/Slide yang akan mengarahkan ke page masing masing yaitu Dashboard, About App, Setting, dan Logout
 
 - **Dashboard Ringkasan Penjualan**: 
   - Menampilkan total nominal penjualan hari ini, jumlah jenis produk, dan produk terlaris.
-  - Dilengkapi animasi visual *Count-Up* dan efek kartu menggunakan `AnimationController`.
+  - Melakukan refresh tampilan dashboard dengan menekan button refresh.
 
 - **Katalog & Manajemen Produk**:
-  - Menampilkan daftar produk lengkap dengan gambar, kategori, stok sisa, harga beli, dan harga jual.
-  - Indikator warna stok otomatis (stok tersedia / habis).
+  - Menampilkan daftar produk lengkap dengan nama produk, stok sisa, harga beli, dan harga jual.
+  - Pencarian produk real time saat mengetik jenis produk tanpa perlu submit.
 
 - **Detail Produk & Prompt Pembelian**:
   - Menampilkan estimasi keuntungan per unit dan deskripsi produk.
+  - Menampilkan gambar produk otomatis
+  - Indikator warna stok otomatis (stok tersedia / habis).
   - *Alert Prompt* interaktif untuk memasukkan jumlah unit barang sebelum dimasukkan ke keranjang.
+
+- **Tambah & Edit Produk**:
+  -Menampilkan halaman untuk menambahkan produk, yang dimana perlu menuliskan nama produk, harga beli, harga jual, stok. Lalu untuk link gambar,kategori dan Deskripsi bisa dimasukkan tetapi tidak wajib atau optional.
+  -Menampilkan halaman untuk melakukan edit produk, mulai dari nama produk,harga beli, harga jual, stok, link gambar, deskripsi dan kategori.
 
 - **Keranjang Belanja & Checkout**:
   - Mengatur jumlah pesanan (+/-), menghapus item, dan kalkulasi subtotal/total secara otomatis.
@@ -32,14 +41,14 @@
   - Menampilkan daftar barang yang dibeli, harga per unit, jumlah, dan total pembayaran.
 
 - **Dark Mode & Light Mode**:
-  - Fitur sakelar mode gelap/terang melalui `ion-toggle` yang terintegrasi dengan `variables.scss` (`body.dark`).
+  - Fitur sakelar mode gelap/terang melalui `ion-toggle` di halaman setting yang    terintegrasi dengan `variables.scss` (`ion-app.dark`).
 
 ---
 
 ## Teknologi & Stack
 
-- **Framework**: [Ionic Framework 7+](https://ionicframework.com/)
-- **Frontend Core**: [Angular](https://angular.io/) (TypeScript, HTML5, SCSS)
+- **Framework**: [Ionic Framework 9](https://ionicframework.com/)
+- **Frontend Core**: [Angular 22.0.1](https://angular.io/) (TypeScript, HTML5, SCSS)
 - **State Management**: Angular Services (`@Injectable({ providedIn: 'root' })`)
 - **Routing**: Angular Router with Route Parameters (`:id`)
 - **Icon Set**: Ionicons
@@ -77,7 +86,7 @@ src/
 
 1. **Clone Repository**:
    ```bash
-   git clone https://github.com/username/simobile-toko-makmur-jaya.git
+   git clone https://github.com/ZKFZ-in/KoperasiHitam-HMP-UTS
    cd simobile-toko-makmur-jaya
    ```
 
