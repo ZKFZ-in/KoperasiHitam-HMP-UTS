@@ -28,7 +28,6 @@ export class KeranjangPage implements OnInit {
 
   ngOnInit() {}
 
-  // Memastikan isi keranjang selalu terbaru setiap kali halaman dibuka
   ionViewWillEnter() {
     this.refreshCart();
   }
@@ -88,7 +87,6 @@ export class KeranjangPage implements OnInit {
     this.refreshCart();
   }
 
-  // sesudah
   prosesCheckout() {
     const hasil = this.cartService.checkout();
 

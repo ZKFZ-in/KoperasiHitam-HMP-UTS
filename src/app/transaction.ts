@@ -234,9 +234,7 @@ export class TransactionService {
 
   constructor() { }
 
-  // Simpan transaksi baru ke riwayat
   addTransaction(items: CartItem[], total: number): Transaksi {
-    // Buat salinan dari items untuk data di riwayat tdak hilang saat keranjang kosong
     const copiedItems: CartItem[] = items.map(item => ({
       produk: { ...item.produk },
       jumlah: item.jumlah 
@@ -248,11 +246,10 @@ export class TransactionService {
       items: [...copiedItems],
       total: total
     };
-    this.riwayatTransaksi.unshift(newTransaksi); // Simpan transaksi terbaru di paling atas
+    this.riwayatTransaksi.unshift(newTransaksi);
     return newTransaksi;
   }
 
-  // Ambil seluruh riwayat transaksi
   getTransactions(): Transaksi[] {
     return this.riwayatTransaksi;
   }

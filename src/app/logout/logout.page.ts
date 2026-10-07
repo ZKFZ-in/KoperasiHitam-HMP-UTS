@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
+import { Animasi } from '../animasi';
 
 @Component({
   selector: 'app-logout',
@@ -11,7 +11,7 @@ import { AnimationController } from '@ionic/angular';
 export class LogoutPage implements OnInit {
 
   constructor(
-    private animationCtrl: AnimationController,
+    private animasi: Animasi,
     private router: Router
   ) { }
 
@@ -19,33 +19,10 @@ export class LogoutPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.fadeInProduk();
+    this.animasi.fadeInHalaman('#myLogout');
   }
 
   prosesLogout() {
     this.router.navigate(['/login']);
-  }
-  
-  // 4. Fungsi pembuat animasi Fade In
-  fadeInProduk() {
-    const produkElement = document.querySelector('#myLogout') as HTMLElement;
-
-    if (produkElement) {
-      const animation = this.animationCtrl
-        .create()
-        .addElement(produkElement)
-        .duration(500) // Durasi animasi dalam milidetik (misal 1.5 detik)
-        .iterations(1) // Jumlah pengulangan
-        .keyframes([ // Pengaturan opacity secara bertahap dari 0 hingga 1
-          { offset: 0, opacity: '0' },
-          { offset: 0.2, opacity: '0.2' },
-          { offset: 0.4, opacity: '0.4' },
-          { offset: 0.6, opacity: '0.6' },
-          { offset: 0.8, opacity: '0.8' },
-          { offset: 1, opacity: '1' }
-        ]);
-
-      animation.play();
-    }
   }
 }
