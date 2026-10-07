@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content class="ion-padding" *ngIf="selectedTransaksi">
+  <div class="ion-padding" *ngIf="selectedTransaksi">
     <ion-card lines="none">
       <ion-card-header>
         <ion-card-title>ID: TRX-{{ selectedTransaksi.id }}</ion-card-title>
@@ -48,10 +48,10 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-  </ion-content>
+  </div>
 
   <!-- Pesan jika ID transaksi tidak ditemukan -->
-  <div \*ngIf="!selectedTransaksi" class="ion-text-center ion-padding">
+  <div *ngIf="!selectedTransaksi" class="ion-text-center ion-padding">
     <ion-text color="danger">
       <h3>Data transaksi tidak ditemukan!</h3>
     </ion-text>
