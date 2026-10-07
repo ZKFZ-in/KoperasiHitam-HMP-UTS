@@ -6,7 +6,8 @@
     <!-- Tombol Tambah Produk -->
     <ion-buttons slot="end">
       <ion-button fill="solid" color="primary" routerLink="/tambah-produk">
-        <ion-icon name="add" slot="icon-only"></ion-icon>
+        <ion-icon name="add" slot="start"></ion-icon>
+        Tambah Produk
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,6 +21,14 @@
       [showClearButton]="'focus'"
       inputmode="search">
     </ion-searchbar>
+
+    <!-- Tombol Keranjang -->
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="primary" routerLink="/keranjang">
+        <ion-icon name="cart-outline" slot="start"></ion-icon>
+        Keranjang
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -44,7 +53,8 @@
 
       <!-- Tombol Edit Produk -->
       <ion-button slot="end" fill="solid" color="warning" [routerLink]="['/edit-produk', item.id]">
-        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Edit
       </ion-button>
     </ion-item>
   </ion-list>
@@ -54,10 +64,4 @@
     <ion-icon name="search-outline" size="large"></ion-icon>
     <p>Produk "<b>{{ kataKunci }}</b>" tidak ditemukan.</p>
   </div>
-
-  <!--Tombol Keranjang-->
-  <ion-button routerLink="/keranjang">
-    <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
-    Keranjang
-  </ion-button>
 </ion-content>
