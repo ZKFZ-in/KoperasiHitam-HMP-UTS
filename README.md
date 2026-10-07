@@ -16,10 +16,10 @@
 - **Katalog & Manajemen Produk**:
   - Menampilkan daftar produk lengkap dengan nama produk, stok sisa, harga beli, dan harga jual.
   - Pencarian produk real time saat mengetik jenis produk tanpa perlu submit.
+  - Menampilkan gambar produk otomatis
 
 - **Detail Produk & Prompt Pembelian**:
   - Menampilkan estimasi keuntungan per unit dan deskripsi produk.
-  - Menampilkan gambar produk otomatis
   - Indikator warna stok otomatis (stok tersedia / habis).
   - *Alert Prompt* interaktif untuk memasukkan jumlah unit barang sebelum dimasukkan ke keranjang.
 

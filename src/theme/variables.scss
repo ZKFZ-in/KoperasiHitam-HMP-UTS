@@ -14,17 +14,17 @@ ion-app.dark {
     --ion-toolbar-background: #1f1f1f;
 
     #myAvatar {
-        border:#f8f0f0;
+        border: #f8f0f0;
     }
+
     .isiInformasi {
-        color:#ffffff;
+        color: #ffffff;
     }
 }
 
 // Mode Terang
-:root 
-{
-    --ion-background-color: #FFFFFF; 
+:root {
+    --ion-background-color: #FFFFFF;
     --ion-background-color-rgb: 255, 255, 255;
 
     #myAvatar {
@@ -43,13 +43,16 @@ ion-app.dark {
     .isiInformasi {
         font-size: 16px;
         line-height: 1.5;
-        text-align:center;
-        color:#000000;
+        text-align: center;
+        color: #000000;
     }
 
-    #logo
-    {
+    #logo {
         border: 3px solid #d4af37;
         border-radius: 50%;
     }
+}
+
+ion-toolbar {
+    background-color: #ebcd08;
 }
