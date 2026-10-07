@@ -166,11 +166,11 @@ export class ProdukService {
     }
 
     reduceStock(id: number, qty: number) {
-    const prod = this.getProdukById(id);
-    if (prod) {
-        prod.stok -= qty;
-        if (prod.stok < 0) prod.stok = 0;
-        prod.terjual = (prod.terjual || 0) + qty;
+    const produk = this.getProdukById(id);
+    if (produk) {
+        produk.stok -= qty;
+        if (produk.stok < 0) produk.stok = 0;
+        produk.terjual = (produk.terjual || 0) + qty;
     }
 }
     

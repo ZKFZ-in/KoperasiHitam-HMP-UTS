@@ -13,7 +13,9 @@
   </ion-header>
 
   <h2>Ringkasan Hari Ini</h2>
-  <ion-button expand="block" (click)="loadDataDashboard()">Perbarui Data</ion-button>
+  <ion-button (click)="loadDataDashboard()">
+    <ion-icon slot="start" name="refresh-outline" class = "refresh"></ion-icon>
+  </ion-button>
 
   
   <ion-card color="success">
