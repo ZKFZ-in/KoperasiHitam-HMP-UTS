@@ -14,7 +14,7 @@ export interface Profile {
 export class ProfileService {
     private profile: Profile[] = [{
         id: 1,
-        namaToko: 'Koperasi Hitam',
+        namaToko: 'Makmur Jaya',
         alamat: 'Jl. Raya No 123, Surabaya',
         noTelepon: '08123456789',
         jamOperasional: '24 Jam'

@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">SIMOBILE Cashier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="center-container">
+    <h2><b>Login sebagai :</b></h2>
+
+    <!-- Tombol Login dengan Avatar Profile & Nama Toko -->
+    <ion-button 
+      routerLink="/home" 
+      color="primary" 
+      size="large" 
+      class="ion-margin-top btn-login">
+      <ion-avatar slot="start" style="width: 32px; height: 32px; margin-right: 8px;">
+        <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/18d8f261-3fa3-4291-869a-4a39830ffab3_gobiz-dashboard-image_1786940842642.jpg" alt="Profile" />
+      </ion-avatar>
+      <span><b>{{ namaToko }}</b></span>
+    </ion-button>
+  </div>
+</ion-content>

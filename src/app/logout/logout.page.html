@@ -1,14 +1,26 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-menu-button slot="start"></ion-menu-button>
-    <ion-title>logout</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pengaturan Akun</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="myLogout" [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">logout</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content id="myLogout" [fullscreen]="true" class="ion-padding">
+  <!-- Elemen yang di-animasikan dengan id="myLogout" -->
+  <div id="myLogout" class="center-container">
+    <h2><b>Logout dari Aplikasi</b></h2> 
+    <p color="medium">Keluar dari akun kasir saat ini?</p>
+
+    <!-- Tombol Logout yang mengarahkan kembali ke Halaman Login -->
+    <ion-button 
+      (click)="prosesLogout()" 
+      color="danger" 
+      size="large" 
+      class="ion-margin-top">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Logout
+    </ion-button>
+  </div>
 </ion-content>

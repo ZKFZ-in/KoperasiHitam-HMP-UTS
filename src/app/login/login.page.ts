@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
+import { ProfileService } from '../profile';
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.page.html',
-  styleUrls: ['./logout.page.scss'],
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
   standalone: false,
 })
-export class LogoutPage implements OnInit {
+export class LoginPage implements OnInit {
+  namaToko: string = 'Makmur Jaya';
 
   constructor(
-    private animationCtrl: AnimationController,
-    private router: Router
+    private profileService: ProfileService,
+    private animationCtrl: AnimationController
   ) { }
 
   ngOnInit() {
+    const profil = this.profileService.getProfile();
+    if (profil && profil.length > 0) {
+      this.namaToko = 'Toko ' + profil[0].namaToko;
+    }
   }
 
   ionViewDidEnter() {
     this.fadeInProduk();
   }
 
-  prosesLogout() {
-    this.router.navigate(['/login']);
-  }
-  
   // 4. Fungsi pembuat animasi Fade In
   fadeInProduk() {
     const produkElement = document.querySelector('#myLogout') as HTMLElement;
