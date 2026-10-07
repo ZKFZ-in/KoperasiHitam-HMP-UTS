@@ -7,18 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="myLogout" [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding">
   <!-- Elemen yang di-animasikan dengan id="myLogout" -->
   <div id="myLogout" class="center-container">
-    <h2><b>Logout dari Aplikasi</b></h2> 
+    <h2 class="ion-margin-top"><b>Logout dari Aplikasi</b></h2> 
     <p color="medium">Keluar dari akun kasir saat ini?</p>
 
     <!-- Tombol Logout yang mengarahkan kembali ke Halaman Login -->
-    <ion-button 
-      (click)="prosesLogout()" 
-      color="danger" 
-      size="large" 
-      class="ion-margin-top">
+    <ion-button (click)="prosesLogout()" color="danger" size="large" class="ion-margin-top">
       <ion-icon name="log-out-outline" slot="start"></ion-icon>
       Logout
     </ion-button>
