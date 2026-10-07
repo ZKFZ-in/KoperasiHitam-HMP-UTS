@@ -7,7 +7,7 @@
 ## Fitur Utama
 - **Struktur Navigasi**:
   - Menampilkan 4 tab yang akan mengarahkan ke masing masing page yaitu Dashboard, Produk, Transaksi, dan Profile
-  - Menampilkan 4 menu tambahan yang terdapat di Drawe/Slide yang akan mengarahkan ke page masing masing yaitu Dashboard, About App, Setting, dan Logout
+  - Menampilkan 4 menu tambahan yang terdapat di Drawer/Slide yang akan mengarahkan ke page masing masing yaitu Dashboard, About App, Setting, dan Logout
 
 - **Dashboard Ringkasan Penjualan**: 
   - Menampilkan total nominal penjualan hari ini, jumlah jenis produk, dan produk terlaris.
@@ -24,8 +24,9 @@
   - *Alert Prompt* interaktif untuk memasukkan jumlah unit barang sebelum dimasukkan ke keranjang.
 
 - **Tambah & Edit Produk**:
-  -Menampilkan halaman untuk menambahkan produk, yang dimana perlu menuliskan nama produk, harga beli, harga jual, stok. Lalu untuk link gambar,kategori dan Deskripsi bisa dimasukkan tetapi tidak wajib atau optional.
-  -Menampilkan halaman untuk melakukan edit produk, mulai dari nama produk,harga beli, harga jual, stok, link gambar, deskripsi dan kategori.
+  - Menampilkan halaman untuk menambahkan produk, yang dimana perlu menuliskan nama produk, harga beli, harga jual, stok. Lalu untuk link gambar,kategori dan Deskripsi bisa dimasukkan tetapi tidak wajib atau optional.
+  - Menampilkan halaman untuk melakukan edit produk, mulai dari nama produk,harga beli, harga jual, stok, link gambar, deskripsi dan kategori.
+  - Terdapat validasi data yang diinput, seperti nama wajib diisi, harga berupa angka diatas 0, stok tidak negatif.
 
 - **Keranjang Belanja & Checkout**:
   - Mengatur jumlah pesanan (+/-), menghapus item, dan kalkulasi subtotal/total secara otomatis.
@@ -42,6 +43,22 @@
 
 - **Dark Mode & Light Mode**:
   - Fitur sakelar mode gelap/terang melalui `ion-toggle` di halaman setting yang    terintegrasi dengan `variables.scss` (`ion-app.dark`).
+
+- **Profile**:
+  - Menampilkan profile dari toko.
+
+- **Edit Profile**:
+  - Menampilkan halaman untuk melakukan perubahan dari profile toko.
+
+- **Animasi**:
+  - Icon refresh di button refresh pada halaman dashboard akan berputar saat ditekan.
+  - Setiap memasuki halaman Dashboard, Produk, Transaksi, Profile, Setting, About, Login dan Logout akan terdapat animasi **Fade In**.
+
+- **Login**:
+  - Menampilkan halaman login ke aplikasi.
+
+- **Logout**:
+  - Menampilkan button logout yang akan berpindah ke halaman login saat ditekan.
 
 ---
 
@@ -66,6 +83,17 @@ src/
 │   ├── keranjang/             # Halaman Keranjang & Konfirmasi Checkout
 │   ├── transaksi/             # Halaman Riwayat Transaksi & Sorting
 │   ├── detail-transaksi/      # Halaman Detail Rincian Transaksi (:id)
+│   ├── tambah-produk/         # Halaman Tambah Produk
+│   ├── edit-produk/           # Halaman Edit Produk
+│   ├── profil/                # Halaman Profile Toko
+│   ├── edit-profile/          # Halaman Edit Profile Toko
+│   ├── settings/              # Halaman Setting
+│   ├── about/                 # Halaman Penjelasan Aplikasi
+│   ├── logout/                # Halaman Logout
+│   ├── login/                 # Halaman Login
+│   ├── theme.ts               # Theme Service (Tema Aplikasi)
+│   ├── animasi.ts             # Animasi Service (Jenis Jenis Animasi)
+│   ├── profile.ts             # Profile Service (Profile Toko)
 │   ├── cart.ts                # Cart Service (Kelola Keranjang)
 │   ├── produk.ts              # Produk Service (Kelola Data & Stok Produk)
 │   └── transaction.ts         # Transaction Service (Kelola Riwayat Transaksi)
@@ -78,7 +106,7 @@ src/
 ## Cara Menjalankan Proyek di Lokal
 
 ### Prasyarat:
-- Node.js (v18 atau lebih baru)
+- Node.js (v22 atau lebih baru)
 - npm
 - Ionic CLI (`npm install -g @ionic/cli`)
 
@@ -87,7 +115,7 @@ src/
 1. **Clone Repository**:
    ```bash
    git clone https://github.com/ZKFZ-in/KoperasiHitam-HMP-UTS
-   cd simobile-toko-makmur-jaya
+   cd KoperasiHitam-HMP-UTS
    ```
 
 2. **Install Dependensi**:
