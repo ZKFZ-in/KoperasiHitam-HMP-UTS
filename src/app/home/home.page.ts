@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ProdukService } from '../produk';
 import { TransactionService } from '../transaction';
-import { AnimationController } from '@ionic/angular';
 import { Animasi } from '../animasi';
 
 @Component({
