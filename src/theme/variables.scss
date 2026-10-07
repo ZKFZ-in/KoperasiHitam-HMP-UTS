@@ -1,5 +1,7 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+// Mode Gelap
 ion-app.dark {
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18, 18, 18;
@@ -19,8 +21,12 @@ ion-app.dark {
     }
 }
 
+// Mode Terang
 :root 
 {
+    --ion-background-color: #FFFFFF; 
+    --ion-background-color-rgb: 255, 255, 255;
+
     #myAvatar {
         margin-top: 60px;
         size: 500px;

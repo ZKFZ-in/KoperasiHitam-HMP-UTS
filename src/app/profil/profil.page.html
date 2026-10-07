@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>Profil</ion-title>
   </ion-toolbar>
@@ -12,7 +12,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div  id="frame">
+  <div id="frame">
     <ion-avatar id="logo">
       <ion-img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/18d8f261-3fa3-4291-869a-4a39830ffab3_gobiz-dashboard-image_1786940842642.jpg"></ion-img>
     </ion-avatar>
@@ -27,7 +27,10 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button class="edit" [routerLink]="['/edit-profile', profile.id]">
-    Edit Profile
-  </ion-button>
+  <div class="ion-text-center ion-margin-top">
+    <ion-button class="edit" [routerLink]="['/edit-profile', profile.id]" color="primary">
+      <ion-icon name="create-outline" slot="start"></ion-icon>
+      Edit Profile
+    </ion-button>
+  </div>
 </ion-content>

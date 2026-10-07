@@ -1,4 +1,9 @@
 .edit{
-    margin-top: 20px;
-    float:right;
+    --border-radius: 20px;
+    min-width: 180px;
+}
+
+.informasi { 
+    max-width: 400px; 
+    margin: 16px auto; 
 }

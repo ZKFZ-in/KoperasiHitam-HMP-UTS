@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>Produk</ion-title>
 
@@ -13,7 +13,7 @@
   </ion-toolbar>
 
   <!-- Pencarian Produk Real-Time (tanpa tombol submit) -->
-  <ion-toolbar>
+  <ion-toolbar class="toolbar-item">
     <ion-searchbar
       [(ngModel)]="kataKunci"
       [debounce]="0"
@@ -43,6 +43,12 @@
   <ion-list lines="full">
     <ion-item *ngFor="let item of produkTerfilter">
 
+      <!-- Gambar Produk di Ujung Kiri -->
+      <ion-thumbnail slot="start" [routerLink]="['/detail-produk', item.id]">
+        <img [src]="item.gambar || 'https://via.placeholder.com/150'" [alt]="item.nama" style="border-radius: 8px; object-fit: cover;" />
+      </ion-thumbnail>
+
+      <!-- Label Nama & Detail Produk -->
       <ion-label [routerLink]="['/detail-produk', item.id]" button>
         <h2><b>{{ item.nama }}</b></h2>
         <p>

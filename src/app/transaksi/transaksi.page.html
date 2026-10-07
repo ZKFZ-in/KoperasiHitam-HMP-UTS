@@ -17,7 +17,7 @@
   <!-- Tampilan jika sudah ada riwayat transaksi -->
   <div *ngIf="daftarTransaksi.length > 0">
     <!-- Komponen Sorting / Pengurutan -->
-    <ion-item class="ion-margin-bottom" lines="outline">
+    <ion-item class="sort-item ion-margin-bottom" lines="outline">
       <ion-label><b>Urutkan:</b></ion-label>
       <ion-select [(ngModel)]="sortOptions" interface="popover">
         <ion-select-option value="terbaru">Tanggal Terbaru</ion-select-option>
