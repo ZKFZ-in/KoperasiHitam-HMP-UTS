@@ -258,14 +258,18 @@ export class TransactionService {
   }
 
   getTotalTransaksiHariIni(): number {
-  let totalHariIni = 0;
-  const hariIni = new Date().toDateString();
+    let totalHariIni = 0;
+    const hariIni = new Date().toDateString();
 
-  for (const t of this.riwayatTransaksi) {
-    if (new Date(t.tanggal).toDateString() === hariIni) {
-      totalHariIni += t.total;
+    for (const t of this.riwayatTransaksi) {
+      if (new Date(t.tanggal).toDateString() === hariIni) {
+        totalHariIni += t.total;
+      }
     }
+    return totalHariIni;
   }
-  return totalHariIni;
-}
+
+  getTransaksiById(id: number): Transaksi | undefined {
+    return this.riwayatTransaksi.find(t => t.id === id);
+  }
 }

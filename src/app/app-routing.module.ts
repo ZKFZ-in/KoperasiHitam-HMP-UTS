@@ -54,10 +54,11 @@ const routes: Routes = [
   {
     path: 'edit-profile/:id',
     loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
+  {
+    path: 'detail-transaksi/:id',
+    loadChildren: () => import('./detail-transaksi/detail-transaksi.module').then( m => m.DetailTransaksiPageModule)
   }
-
-
-
 ];
 
 @NgModule({

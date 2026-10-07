@@ -12,9 +12,6 @@ export class TransaksiPage implements OnInit {
 
   sortOptions: string = 'terbaru';
 
-  isDetailModalOpen = false;
-  selectedTransaksi: Transaksi | undefined;
-
   constructor(
     private transactionService: TransactionService,
     private animasi: Animasi
@@ -45,18 +42,6 @@ export class TransaksiPage implements OnInit {
       }
       return 0;
     });
-  }
-
-  
-  bukaDetail(transaksi: Transaksi) {
-    this.selectedTransaksi = transaksi;
-    this.isDetailModalOpen = true;
-  }
-
-  
-  tutupDetail() {
-    this.isDetailModalOpen = false;
-    this.selectedTransaksi = undefined;
   }
 
   ionViewDidEnter() {

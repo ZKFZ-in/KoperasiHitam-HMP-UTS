@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/transaksi"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Transaksi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Detail Transaksi</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" *ngIf="selectedTransaksi">
+    <ion-card lines="none">
+      <ion-card-header>
+        <ion-card-title>ID: TRX-{{ selectedTransaksi.id }}</ion-card-title>
+        <ion-card-subtitle>
+          Waktu: {{ selectedTransaksi.tanggal | date:'dd MMMM yyyy, HH:mm:ss' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <h3><b>Rincian Barang Diproses:</b></h3>
+
+    <ion-list lines="full">
+      <ion-item *ngFor="let detail of selectedTransaksi.items">
+        <ion-label>
+          <h2><b>{{ detail.produk.nama }}</b></h2>
+          <p>{{ detail.jumlah }} x Rp {{ detail.produk.hargaJual | number }}</p>
+        </ion-label>
+        <ion-text slot="end">
+          <b>Rp {{ (detail.jumlah * detail.produk.hargaJual) | number }}</b>
+        </ion-text>
+      </ion-item>
+    </ion-list>
+
+    <ion-card class="ion-margin-top">
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label><h2><b>Total Pembayaran</b></h2></ion-label>
+          <ion-text slot="end" color="primary">
+            <h3><b>Rp {{ selectedTransaksi.total | number }}</b></h3>
+          </ion-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+  <!-- Pesan jika ID transaksi tidak ditemukan -->
+  <div \*ngIf="!selectedTransaksi" class="ion-text-center ion-padding">
+    <ion-text color="danger">
+      <h3>Data transaksi tidak ditemukan!</h3>
+    </ion-text>
+  </div>
+</ion-content>
