@@ -66,15 +66,15 @@ export class DetailProdukPage implements OnInit {
         handler: (data: any) => {
           const qty = Number(data.jumlah);
           if (this.produkDetail && qty > 0 && qty <= this.produkDetail.stok) { 
-            // 1. Simpan ke keranjang sejumlah qty 
+            
             this.cartService.addToCart(this.produkDetail, qty); 
-            // 2. Tutup alert prompt & panggil alert sukses 
+            
             this.isInputAlertOpen = false; 
             this.pesanSukses = `${qty}x ${this.produkDetail.nama} berhasil ditambahkan ke keranjang!`;
             this.isSuksesAlertOpen = true; 
             return true; 
           } else { 
-            // Jika jumlah 0 atau melebihi stok 
+             
             return false; 
           }
         }
