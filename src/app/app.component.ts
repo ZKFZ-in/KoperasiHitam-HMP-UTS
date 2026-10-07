@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; 
 import { Theme } from './theme';
 
 @Component({
@@ -8,5 +9,13 @@ import { Theme } from './theme';
   standalone: false,
 })
 export class AppComponent {
-  constructor(public theme: Theme) {}
+  constructor(
+    public theme: Theme, 
+    private router: Router      
+  ) {}
+
+  
+  get isLoginPage(): boolean {
+    return this.router.url === '/login' || this.router.url === '/';
+  }
 }
