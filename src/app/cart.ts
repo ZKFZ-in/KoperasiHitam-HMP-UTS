@@ -27,7 +27,6 @@ export class CartService {
   getCart(): CartItem[] {
     return this.items;
   }
-
   
   addToCart(produk: Produk, qty: number = 1) {
     const existingIndex = this.items.findIndex(item => item.produk.id === produk.id);
@@ -41,7 +40,6 @@ export class CartService {
       });
     }
   }
-
   
   updateQuantity(productId: number, delta: number) {
     const item = this.items.find(i => i.produk.id === productId);
@@ -52,28 +50,23 @@ export class CartService {
       }
     }
   }
-
   
   removeFromCart(productId: number) {
     this.items = this.items.filter(i => i.produk.id !== productId);
   }
-
  
   getTotalPrice(): number {
     return this.items.reduce((total, item) => total + (item.produk.hargaJual * item.jumlah), 0);
   }
-
   
   clearCart() {
     this.items = [];
   }
-
     
   checkout(): HasilCheckout {
     if (this.items.length === 0) {
       return { berhasil: false, pesan: 'Keranjang masih kosong.' };
     }
-
     
     for (const item of this.items) {
       const produk = this.produkService.getProdukById(item.produk.id);
@@ -81,18 +74,14 @@ export class CartService {
         return { berhasil: false, pesan: `Stok ${item.produk.nama} tidak mencukupi.` };
       }
     }
-
     
     for (const item of this.items) {
       this.produkService.reduceStock(item.produk.id, item.jumlah);
     }
-
     
     const transaksi = this.transactionService.addTransaction(this.items, this.getTotalPrice());
 
-    
     this.clearCart();
-
     return { berhasil: true, transaksi };
   }
 }

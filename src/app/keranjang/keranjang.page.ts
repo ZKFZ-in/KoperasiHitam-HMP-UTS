@@ -97,8 +97,6 @@ export class KeranjangPage implements OnInit {
     }
 
     this.refreshCart();
-
-    
     this.isConfirmAlertOpen = false;
     this.isSuccessAlertOpen = true;
   }

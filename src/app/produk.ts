@@ -189,11 +189,9 @@ export class ProdukService {
         }
     }
 
-
     getJumlahProduk(): number {
         return this.product.length;
     }
-
 
     getProdukTerlaris(): string {
         if (this.product.length === 0) {
@@ -211,7 +209,6 @@ export class ProdukService {
                 produkTerlaris = this.product[i];
             }
         }
-
         return produkTerlaris.nama;
     }
 }

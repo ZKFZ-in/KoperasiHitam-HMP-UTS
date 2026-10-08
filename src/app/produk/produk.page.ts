@@ -38,7 +38,6 @@ export class ProdukPage implements OnInit {
   get produkTerfilter(): Produk[] {
     const kunci = (this.kataKunci || '').trim().toLowerCase();
 
-
     if (kunci === '') {
       return this.daftarProduk;
     }
