@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
+import { UiService } from '../uiloading';
 
 @Component({
   selector: 'app-tambah-produk',
@@ -27,7 +28,8 @@ export class TambahProdukPage {
 
   constructor(
     private produkService: ProdukService,
-    private router: Router
+    private router: Router,
+    private ui: UiService
   ) {}
 
   validasiNama() {
@@ -87,7 +89,17 @@ export class TambahProdukPage {
       return;
     }
 
-    this.produkService.addProduk(this.produkInput);
-    this.router.navigate(['/produk']);
+    this.ui.tampilLoading('Menyimpan produk...');
+    this.produkService.addProduk(this.produkInput)
+      .subscribe({
+        next: () => {
+          this.ui.sembunyiLoading();
+          this.router.navigate(['/produk']);
+        },
+        error: (err) => {
+          this.ui.sembunyiLoading();
+          this.ui.tampilError(err);
+        }
+      });
   }
 }

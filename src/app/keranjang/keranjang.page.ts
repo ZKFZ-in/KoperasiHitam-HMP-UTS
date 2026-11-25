@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { UiService } from '../uiloading';
 import { CartService, CartItem } from '../cart';
 import { TransactionService } from '../transaction';
 import { ProdukService } from '../produk';
@@ -23,7 +24,9 @@ export class KeranjangPage implements OnInit {
     private cartService: CartService,
     private transactionService: TransactionService,
     private produkService: ProdukService,
-    private router: Router
+    private router: Router,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {}
@@ -88,17 +91,22 @@ export class KeranjangPage implements OnInit {
   }
 
   prosesCheckout() {
-    const hasil = this.cartService.checkout();
+    this.ui.tampilLoading('Memproses transaksi...');
+    this.cartService.checkout()
+      .subscribe((hasil) => {
+        this.ui.sembunyiLoading(); // checkout() tidak pernah error, kegagalan datang lewat hasil.berhasil
+        if (!hasil.berhasil) {
+          this.warningMessage = hasil.pesan || 'Checkout gagal.';
+          this.isWarningAlertOpen = true;
+          this.cdr.markForCheck();
+          return;
+        }
 
-    if (!hasil.berhasil) {
-      this.warningMessage = hasil.pesan || 'Checkout gagal.';
-      this.isWarningAlertOpen = true;
-      return;
-    }
-
-    this.refreshCart();
-    this.isConfirmAlertOpen = false;
-    this.isSuccessAlertOpen = true;
+        this.refreshCart();
+        this.isConfirmAlertOpen = false;
+        this.isSuccessAlertOpen = true;
+        this.cdr.markForCheck();
+      });
   }
 
   onSuccessAlertDismiss() {

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ProdukService } from '../produk';
-import { TransactionService } from '../transaction';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { ProdukService, getProdukTerlaris } from '../produk';
+import { TransactionService, hitungTotalHariIni } from '../transaction';
+import { UiService } from '../uiloading';
 import { Animasi } from '../animasi';
 
 @Component({
@@ -17,19 +18,41 @@ export class HomePage {
   constructor(
     private produkService: ProdukService,
     private transaksiService: TransactionService,
-    private animasi: Animasi
-  ) {
-    this.loadDataDashboard();
-  }
+    private animasi: Animasi,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ionViewWillEnter() {
     this.loadDataDashboard();
   }
 
   loadDataDashboard() {
-    this.jumlahProduk = this.produkService.getJumlahProduk();
-    this.totalTransaksiHariIni = this.transaksiService.getTotalTransaksiHariIni();
-    this.produkTerlaris = this.produkService.getProdukTerlaris();
+    this.ui.tampilLoading();
+    // 1) ambil produk dulu, 2) setelah berhasil baru ambil transaksi
+    this.produkService.getProduk().subscribe({
+      next: (produk) => {
+        this.jumlahProduk = produk.length;
+        this.produkTerlaris = getProdukTerlaris(produk);
+        this.cdr.markForCheck();
+
+        this.transaksiService.getTransactions().subscribe({
+          next: (transaksi) => {
+            this.totalTransaksiHariIni = hitungTotalHariIni(transaksi);
+            this.ui.sembunyiLoading();
+            this.cdr.markForCheck();
+          },
+          error: (err) => {
+            this.ui.sembunyiLoading();
+            this.ui.tampilError(err);
+          }
+        });
+      },
+      error: (err) => {
+        this.ui.sembunyiLoading();
+        this.ui.tampilError(err);
+      }
+    });
     this.animasi.refreshBerputar('.refresh');
   }
 

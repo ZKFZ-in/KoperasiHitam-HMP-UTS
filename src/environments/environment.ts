@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://ubaya.cloud/hybrid/160424014'
+  apiUrl: 'https://ubaya.fun/hybrid/160424014'
 };
 
 /*

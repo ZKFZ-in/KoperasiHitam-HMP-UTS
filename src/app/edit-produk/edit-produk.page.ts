@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
+import { UiService } from '../uiloading';
 
 @Component({
   selector: 'app-edit-produk',
@@ -31,7 +32,9 @@ export class EditProdukPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private produkService: ProdukService,
-    private router: Router
+    private router: Router,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -40,23 +43,29 @@ export class EditProdukPage implements OnInit {
   }
 
   isiForm() {
-    const produk = this.produkService.getProdukById(this.produkId);
-
-    if (!produk) {
-      this.router.navigate(['/produk']);
-      return;
-    }
-
-    this.produkInput = {
-      id: produk.id,
-      nama: produk.nama,
-      hargaBeli: produk.hargaBeli,
-      hargaJual: produk.hargaJual,
-      stok: produk.stok,
-      gambar: produk.gambar || '',
-      kategori: produk.kategori || '',
-      deskripsi: produk.deskripsi || ''
-    };
+    this.ui.tampilLoading();
+    this.produkService.getProdukById(this.produkId)
+      .subscribe({
+        next: (produk) => {
+          this.ui.sembunyiLoading();
+          this.produkInput = {
+            id: produk.id,
+            nama: produk.nama,
+            hargaBeli: produk.hargaBeli,
+            hargaJual: produk.hargaJual,
+            stok: produk.stok,
+            gambar: produk.gambar || '',
+            kategori: produk.kategori || '',
+            deskripsi: produk.deskripsi || ''
+          };
+          this.cdr.markForCheck();
+        },
+        error: (err) => {
+          this.ui.sembunyiLoading();
+          this.ui.tampilError(err);
+          this.router.navigate(['/produk']);
+        }
+      });
   }
 
   
@@ -117,7 +126,17 @@ export class EditProdukPage implements OnInit {
       return;
     }
 
-    this.produkService.updateProduk(this.produkId, this.produkInput);
-    this.router.navigate(['/produk']);
+    this.ui.tampilLoading('Menyimpan perubahan...');
+    this.produkService.updateProduk(this.produkId, this.produkInput)
+      .subscribe({
+        next: () => {
+          this.ui.sembunyiLoading();
+          this.router.navigate(['/produk']);
+        },
+        error: (err) => {
+          this.ui.sembunyiLoading();
+          this.ui.tampilError(err);
+        }
+      });
   }
 }

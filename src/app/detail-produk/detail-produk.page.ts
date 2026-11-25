@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { UiService } from '../uiloading';
 import { ActivatedRoute } from '@angular/router';
 import { Produk, ProdukService } from '../produk';
 import { CartService } from '../cart';
@@ -21,13 +22,29 @@ export class DetailProdukPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private produkService: ProdukService,
-    private cartService: CartService
+    private cartService: CartService,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      this.produkDetail = this.produkService.getProdukById(id);
+      this.ui.tampilLoading();
+      this.produkService.getProdukById(id)
+        .subscribe({
+          next: (data) => {
+            this.produkDetail = data;
+            this.ui.sembunyiLoading();
+            this.cdr.markForCheck();
+          },
+          error: (err) => {
+            this.ui.sembunyiLoading();
+            this.produkDetail = undefined;
+            this.cdr.markForCheck();
+            this.ui.tampilError(err);
+          }
+        });
     });
   }
 

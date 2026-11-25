@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { UiService } from '../uiloading';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionService, Transaksi } from '../transaction';
 
@@ -13,13 +14,29 @@ export class DetailTransaksiPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      this.selectedTransaksi = this.transactionService.getTransaksiById(id);
+      this.ui.tampilLoading();
+      this.transactionService.getTransaksiById(id)
+        .subscribe({
+          next: (data) => {
+            this.selectedTransaksi = data;
+            this.ui.sembunyiLoading();
+            this.cdr.markForCheck();
+          },
+          error: (err) => {
+            this.ui.sembunyiLoading();
+            this.selectedTransaksi = undefined;
+            this.cdr.markForCheck();
+            this.ui.tampilError(err);
+          }
+        });
     });
   }
 }

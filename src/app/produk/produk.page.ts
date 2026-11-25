@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { UiService } from '../uiloading';
 import { Produk, ProdukService } from '../produk';
 import {Animasi} from '../animasi';
 
@@ -16,19 +17,32 @@ export class ProdukPage implements OnInit {
 
   constructor(
     private produkService: ProdukService,
-    private animasi:Animasi
+    private animasi:Animasi,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {
-    this.loadProduk();
-  }
+  // Data dimuat di ionViewWillEnter (dipanggil juga saat pertama kali masuk halaman)
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.loadProduk();
   }
 
   loadProduk() {
-    this.daftarProduk = this.produkService.getProduk();
+    this.ui.tampilLoading();
+    this.produkService.getProduk()
+      .subscribe({
+        next: (data) => {
+          this.daftarProduk = data;
+          this.ui.sembunyiLoading();
+          this.cdr.markForCheck();
+        },
+        error: (err) => {
+          this.ui.sembunyiLoading();
+          this.ui.tampilError(err);
+        }
+      });
   }
 
   ionViewDidEnter() {

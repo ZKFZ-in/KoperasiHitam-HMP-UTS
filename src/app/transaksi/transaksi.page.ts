@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { UiService } from '../uiloading';
 import { TransactionService, Transaksi} from '../transaction';
 import {Animasi} from '../animasi';
 @Component({
@@ -14,15 +15,28 @@ export class TransaksiPage implements OnInit {
 
   constructor(
     private transactionService: TransactionService,
-    private animasi: Animasi
+    private animasi: Animasi,
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {
-    this.daftarTransaksi = this.transactionService.getTransactions();
-  }
+  // Data dimuat di ionViewWillEnter (dipanggil juga saat pertama kali masuk halaman)
+  ngOnInit() { }
 
   ionViewWillEnter() {
-    this.daftarTransaksi = this.transactionService.getTransactions();
+    this.ui.tampilLoading();
+    this.transactionService.getTransactions()
+      .subscribe({
+        next: (data) => {
+          this.daftarTransaksi = data;
+          this.ui.sembunyiLoading();
+          this.cdr.markForCheck();
+        },
+        error: (err) => {
+          this.ui.sembunyiLoading();
+          this.ui.tampilError(err);
+        }
+      });
   }
 
   //Sorting daftar transaksi berdasarkan pilihan user
