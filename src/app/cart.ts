@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Produk, ProdukService } from './produk';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Produk } from './produk';
 import { TransactionService, Transaksi } from './transaction';
+import { UiService } from './uiloading';
 
 export interface CartItem {
   produk: Produk;
@@ -20,8 +23,8 @@ export class CartService {
   private items: CartItem[] = [];
 
   constructor(
-    private produkService: ProdukService,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private ui: UiService
   ) { }
 
   getCart(): CartItem[] {
@@ -63,25 +66,19 @@ export class CartService {
     this.items = [];
   }
     
-  checkout(): HasilCheckout {
+  // Pemeriksaan stok, pengurangan stok, dan penyimpanan transaksi sekarang dilakukan server.
+  // Error (stok kurang, offline, dll) diubah menjadi HasilCheckout supaya halaman tinggal menampilkannya.
+  checkout(): Observable<HasilCheckout> {
     if (this.items.length === 0) {
-      return { berhasil: false, pesan: 'Keranjang masih kosong.' };
+      return of({ berhasil: false, pesan: 'Keranjang masih kosong.' });
     }
-    
-    for (const item of this.items) {
-      const produk = this.produkService.getProdukById(item.produk.id);
-      if (!produk || produk.stok < item.jumlah) {
-        return { berhasil: false, pesan: `Stok ${item.produk.nama} tidak mencukupi.` };
-      }
-    }
-    
-    for (const item of this.items) {
-      this.produkService.reduceStock(item.produk.id, item.jumlah);
-    }
-    
-    const transaksi = this.transactionService.addTransaction(this.items, this.getTotalPrice());
 
-    this.clearCart();
-    return { berhasil: true, transaksi };
+    return this.transactionService.addTransaction(this.items).pipe(
+      map(res => {
+        this.clearCart();
+        return { berhasil: true, transaksi: res.transaksi } as HasilCheckout;
+      }),
+      catchError(err => of({ berhasil: false, pesan: this.ui.pesanError(err) } as HasilCheckout))
+    );
   }
 }
